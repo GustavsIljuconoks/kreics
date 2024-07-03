@@ -2,10 +2,7 @@ import NavBar from "@/ui/nav-bar";
 
 export default function Page() {
   return (
-    <div
-      id="content"
-      className="w-full flex justify-center p-md sm:p-lg md:px-12 md:py-20 2xl:px-32"
-    >
+    <div className="w-full flex justify-center">
       <div className="lg:flex w-full">
         <NavBar />
 

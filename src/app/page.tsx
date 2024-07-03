@@ -26,7 +26,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="flex flex-col p-6">
+    <main className="flex flex-col">
       <div className="lg:flex w-full">
         <NavBar />
 

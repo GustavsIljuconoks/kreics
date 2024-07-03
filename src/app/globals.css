@@ -25,10 +25,6 @@
     @apply py-[5%] h-full w-11/12 left-1/2 -translate-x-1/2 opacity-0 absolute top-0 transition ease-in;
   }
 
-  .details {
-    @apply relative h-full w-full bg-white-ish flex items-center;
-  }
-
   .project-cover:hover .details-wrap {
     @apply opacity-100;
   }

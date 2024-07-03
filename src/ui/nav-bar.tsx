@@ -107,7 +107,9 @@ export default function NavBar() {
 
         {/* mobile nav */}
         <div
-          className={`${styles["mobile-nav"]} ${hamburger ? styles["open-menu"] : styles["closed-menu"]}`}
+          className={`${styles["mobile-nav"]} ${
+            hamburger ? styles["open-menu"] : styles["closed-menu"]
+          }`}
         >
           <ul className="flex flex-col gap-8 list-none">
             {navLinks.map((item) => (
