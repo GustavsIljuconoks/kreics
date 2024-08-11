@@ -6,8 +6,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { navLinks } from "@/data/links";
 import styles from "@/styles/nav-bar.module.css";
+import { StrapiImage } from "@/app/components/StrapiImage";
 
-export default function NavBar() {
+interface LinkItem {
+  id: number;
+  url: string;
+  isExternal: boolean;
+  text: string;
+}
+
+interface IHeaderProps {
+  data: {
+    sectionText: LinkItem[];
+    logo: {
+      id: number;
+      url: string;
+      isExternal: boolean;
+      text: string;
+    };
+  }
+}
+
+export default function NavBar({ data }: Readonly<IHeaderProps>) {
   const [hamburger, setHamburger] = useState(false);
 
   const hamburgerMenu = () => {
@@ -21,16 +41,18 @@ export default function NavBar() {
     }
   };
 
+  const { sectionText, logo } = data;
+
   return (
     <aside className="lg:w-1/6 lg:h-screen">
       <div className="w-full">
         <div className="flex flex-row mb-4 justify-between items-center">
           <button className="w-[120px] h-[120px] cursor-pointer">
-            <Link href="/">
-              <Image
-                src="./next.svg"
+            <Link href={logo.url}>
+              <StrapiImage
+                src="/next.svg"
+                alt={logo.text}
                 className="w-100 h-auto"
-                alt="Logo spinning camera"
                 width={100}
                 height={100}
               />
@@ -48,17 +70,13 @@ export default function NavBar() {
 
         <div id="nav" className="p-0 text-left block w-auto static">
           <ul id="nav-links" className="gap-y-10 lg:gap-y-0">
-            <li id="first" className="nav-link">
-              <Link href="/about" className="hidden lg:block">
-                ABOUT ME
-              </Link>
-            </li>
-
-            <li id="second" className="nav-link">
-              <Link href="/contact" className="hidden lg:block">
-                CONTACT
-              </Link>
-            </li>
+            {sectionText.map((item) => (
+              <li key={item.id} className="nav-link hidden lg:block">
+                <Link href={item.url} target={item.isExternal ? "_blank" : ''}>
+                  {item.text}
+                </Link>
+              </li>
+            ))}
 
             <li id="third" className="nav-link mb-2">
               <button
@@ -112,13 +130,15 @@ export default function NavBar() {
           }`}
         >
           <ul className="flex flex-col gap-8 list-none">
-            {navLinks.map((item) => (
-              <li
+            {sectionText.map((item) => (
+              <li 
+                key={item.id} 
                 className="nav-link"
-                key={item.title}
                 onClick={() => hamburgerMenu()}
               >
-                <Link href={item.link}>{item.title}</Link>
+                <Link href={item.url}>
+                  {item.text}
+                </Link>
               </li>
             ))}
           </ul>

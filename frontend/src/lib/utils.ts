@@ -10,7 +10,6 @@ export function getStrapiMedia(url: string | null) {
 }
 
 export function flattenAttributes(data: any): any {
-  // Check if data is a plain object; return as is if not
   if (
     typeof data !== "object" ||
     data === null ||
@@ -20,7 +19,6 @@ export function flattenAttributes(data: any): any {
     return data;
   }
 
-  // If data is an array, apply flattenAttributes to each element and return as array
   if (Array.isArray(data)) {
     return data.map((item) => flattenAttributes(item));
   }
