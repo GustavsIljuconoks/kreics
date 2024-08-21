@@ -11,7 +11,7 @@ interface IThumbnail {
 
 export function Thumbnail(event: IThumbnail) {
     return (
-        <Link href={`/photos/${event.name}`}>
+        <Link href={`/${event.type}/${event.name}`}>
             <div className='project-cover'>
                 <div className="cover-container">
                     <div className="cover-image-wrap w-full h-full relative">

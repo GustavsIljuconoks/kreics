@@ -18,7 +18,7 @@ async function getStrapiData(path: string) {
 }
 
 export default async function Page() {
-  const strapiData = await getStrapiData("/api/photo");
+  const strapiData = await getStrapiData("/api/video");
   const { event } = strapiData;
 
   return (
@@ -27,7 +27,7 @@ export default async function Page() {
           id="photo-showcase"
           className="w-full md:flex flex-wrap items-start"
         >
-          <h1 className="project-type text-[30vw] lg:text-[5vw]">photo</h1>
+          <h1 className="project-type text-[30vw] lg:text-[5vw]">videos</h1>
 
           <div className="image-collection-container md:-mt-[6.5rem] lg:grid-cols-2 lg:mt-0">
 
