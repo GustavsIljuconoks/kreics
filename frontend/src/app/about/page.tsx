@@ -1,4 +1,3 @@
-import NavBar from "@/ui/nav-bar";
 import { BlocksRenderer, type BlocksContent } from '@strapi/blocks-react-renderer';
 import { StrapiImage } from "@/app/components/StrapiImage";
 import { flattenAttributes } from "@/lib/utils";

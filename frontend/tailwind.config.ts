@@ -18,6 +18,7 @@ const config: Config = {
     extend: {
       colors: {
         'orange': '#FF7B00',
+        'orange-light': '#FFEDD5',
         'error': '#FF0000',
         'white-ish': '#F8F8F8',
         'black': {

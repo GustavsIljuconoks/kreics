@@ -9,39 +9,39 @@
 }
 
 @layer components {
-  .nav-link {
-    @apply font-bold text-[20px] text-orange;
-  }
-
-  .page-collection {
-    @apply text-black-70 font-semibold ml-2;
-  }
-
-  .cover-container {
-    @apply bg-black-10 mb-2 relative md:mt-0;
-  }
-
-  .details-wrap {
-    @apply py-[5%] h-full w-11/12 left-1/2 -translate-x-1/2 opacity-0 absolute top-0 transition ease-in;
-  }
-
-  .project-cover:hover .details-wrap {
-    @apply opacity-100;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
+    .nav-link {
+        @apply font-bold text-[20px] text-orange;
     }
-    to {
-      opacity: 1;
-    }
-  }
 
-  .fadeInAnimated {
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-  }
+    .page-collection {
+        @apply text-black-70 font-semibold ml-2;
+    }
+
+    .cover-container {
+        @apply bg-black-10 mb-2 relative md:mt-0;
+    }
+
+    .details-wrap {
+        @apply py-[5%] h-full w-11/12 left-1/2 -translate-x-1/2 opacity-0 absolute top-0 transition ease-in;
+    }
+
+    .details {
+        @apply relative h-full w-full bg-orange-light flex items-center opacity-70 transition-opacity;
+    }
+
+    .project-cover:hover .details-wrap {
+        @apply opacity-100;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0}
+        to {opacity: 1}
+    }
+      
+    .fadeInAnimated {
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+    }
 }
 
 .hamburger-react {
@@ -72,12 +72,6 @@
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 1rem;
   margin-top: -3.3rem;
-}
-
-@media only screen and (min-width: 1024px) {
-  .project-type {
-    writing-mode: vertical-rl;
-  }
 }
 
 @media only screen and (min-width: 1024px) {

@@ -25,11 +25,32 @@ export interface ComponentsLink extends Schema.Component {
   };
 }
 
+export interface ComponentsGallery extends Schema.Component {
+  collectionName: 'components_components_galleries';
+  info: {
+    displayName: 'Gallery';
+    icon: 'picture';
+    description: '';
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.Text;
+    media: Attribute.Media<'images' | 'videos', true> & Attribute.Required;
+    thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    tag: Attribute.Relation<
+      'components.gallery',
+      'oneToOne',
+      'api::media-tag.media-tag'
+    >;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'layout.header': LayoutHeader;
       'components.link': ComponentsLink;
+      'components.gallery': ComponentsGallery;
     }
   }
 }

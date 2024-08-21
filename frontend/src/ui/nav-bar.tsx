@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Fade as Hamburger } from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
-import { navLinks } from "@/data/links";
 import styles from "@/styles/nav-bar.module.css";
 import { StrapiImage } from "@/app/components/StrapiImage";
 
@@ -77,16 +76,6 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
                 </Link>
               </li>
             ))}
-
-            <li id="third" className="nav-link mb-2">
-              <button
-                onClick={() => showCaseWork()}
-                type="button"
-                className="hidden lg:block"
-              >
-                WORK
-              </button>
-            </li>
 
             {/* <div
 							id="subnav"
