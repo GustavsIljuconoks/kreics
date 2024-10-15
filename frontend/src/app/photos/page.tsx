@@ -3,8 +3,19 @@ import { Thumbnail } from "@/app/components/Thumbnail";
 
 const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
+const qs = require('qs');
+const query = qs.stringify({
+  populate: {
+    event: {
+      populate: '*',
+    },
+  },
+  }, {
+    encodeValuesOnly: true,
+});
+
 async function getStrapiData(path: string) {
-  const res = await fetch(baseUrl + path + "?populate[event][populate]=*");
+  const res = await fetch(`${baseUrl}${path}?${query}`);
 
   if (!res.ok) {
     console.error(`Error: ${res.status} - ${res.statusText}`);
@@ -27,7 +38,7 @@ export default async function Page() {
           id="photo-showcase"
           className="w-full md:flex flex-wrap items-start"
         >
-          <h1 className="project-type text-[30vw] lg:text-[5vw]">photo</h1>
+          <h1 className="project-type text-[30vw] lg:text-[5vw]">photos</h1>
 
           <div className="image-collection-container md:-mt-[6.5rem] lg:grid-cols-2 lg:mt-0">
 

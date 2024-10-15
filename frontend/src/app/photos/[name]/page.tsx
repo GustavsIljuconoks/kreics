@@ -1,22 +1,47 @@
-// import ScrollButton from '../components/ScrollButton';
+'use client';
 
-// import Masonry from 'react-masonry-css';
-// import { LazyLoadImage } from "react-lazy-load-image-component";
-// import 'react-lazy-load-image-component/src/effects/blur.css';
+const qs = require('qs');
+import { flattenAttributes } from "@/lib/utils";
+import { BASE_URL } from "@/lib/definitions";
+import { StrapiImage } from "../../components/StrapiImage";
+import Masonry from 'react-masonry-css';
+import ScrollButton from "@/app/components/ScrollButton";
 
-// import LightGallery from 'lightgallery/react';
+async function getStrapiData(path: string, eventName: string) {
+    const query = qs.stringify({
+        populate: {
+            event: {
+                populate: '*',
+            },
+        }
+    }, { encodeValuesOnly: true });
 
-// import styles
-// import 'lightgallery/css/lightgallery.css';
-// import 'lightgallery/css/lg-zoom.css';
-// import 'lightgallery/css/lg-thumbnail.css';
+  const res = await fetch(`${BASE_URL}${path}?${query}`);
 
-export default function ProjectPage() {
-	// const lightboxRef = useRef(null);
+  if (!res.ok) {
+    console.error(`Error: ${res.status} - ${res.statusText}`);
+    return null;
+  }
 
-	// const projectInfo = useParams();
-	// const location = useLocation();
-	// const propsData = location.state;
+  const data = await res.json();
+  const flattenedData = flattenAttributes(data);
+
+  const filteredEvents = flattenedData.event.filter((event: { name: string; }) => event.name === decodeURIComponent(eventName));
+
+  return filteredEvents;
+}
+
+
+interface ProjectPageParams {
+    params: {
+        name: string;
+    };
+}
+
+export default async function ProjectPage({ params }: ProjectPageParams) {
+    const { name } = params;
+    const eventArray = await getStrapiData("/api/photo", name);
+    let event = eventArray[0];
 
     return (
         <div id="content" className="w-full px-8 pt-20 pb-16 md:px-16 xl:px-32">
@@ -24,58 +49,38 @@ export default function ProjectPage() {
 
                 <div className="w-full lg:w-5/6 text-center">
                     <div className="project-module w-full bg-black-10 mb-8">
-                        {/* <img
-                            src={propsData.thumbnail}
-                            srcSet={propsData.thumbnail}
-                        /> */}
+                        <StrapiImage 
+                            src={BASE_URL + event.thumbnail.url}
+                            alt={event.thumbnail.alternativeText}
+                            width={1000}
+                            height={1000}
+                        />
                     </div>
 
                     <div className="description mb-32 p-6 text-start lg:mb-56 lg:p-0">
-                        {/* <h1 className="text-2xl font-bold mb-4">
-                            {propsData.eventName}
+                        <h1 className="text-2xl font-bold mb-4">
+                            {event.name}
                         </h1>
-                        <p>{propsData.description}</p> */}
+                        <p>{event.description}</p>
                     </div>
 
-                    {/* <Masonry
-                        breakpointCols={{ default: 3, 800: 1 }}
-                        className="flex gap-2 lg:w-33">
-                        {loading && 'Loading...'}
+                    <Masonry
+                        breakpointCols={{ default: 3, 1024: 1, 1600: 2 }}
+                        className="flex gap-2">
 
-                        {docs?.map((doc, idx) => (
-                            <div key={Math.random()}>
-                                <LazyLoadImage
-                                    src={doc.imageUrl}
-                                    srcSet={doc.imageUrl}
-                                    effect="blur"
+                        {event.media.data?.map((image: any, idx: number) => (
+                            <div key={idx}>
+                                <StrapiImage
+                                    src={BASE_URL + image.url}
+                                    alt={image.alternativeText}
+                                    width={1000}
+                                    height={1000}
                                     className="my-4 hover:opacity-70 cursor-pointer"
-                                    onClick={() => {
-                                        lightboxRef.current?.openGallery(
-                                            idx,
-                                        );
-                                    }}
                                 />
                             </div>
                         ))}
-                    </Masonry> */}
-
-                    {/* <LightGallery
-                        onInit={(ref) => {
-                            if (ref) {
-                                lightboxRef.current = ref.instance;
-                            }
-                        }}
-                        speed={500}
-                        download={false}
-                        closable
-                        licenseKey
-                        dynamic
-                        dynamicEl={docs?.map((image) => ({
-                            src: image.imageUrl,
-                            thumb: image.imageUrl,
-                        }))}></LightGallery> */}
-
-                    {/* <ScrollButton /> */}
+                    </Masonry>
+                    <ScrollButton />
                 </div>
             </div>
         </div>

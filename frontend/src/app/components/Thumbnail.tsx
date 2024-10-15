@@ -31,7 +31,7 @@ export function Thumbnail(event: IThumbnail) {
                         <div className="details">
                             <div className="details-inner w-full p-[0%]">
                                 <div className="title-preserver-whitespace text-black-70" key={event.name}>
-                                        <p>{event.name}</p>
+                                    <p>{event.name}</p>
                                 </div>
                             </div>
                         </div>

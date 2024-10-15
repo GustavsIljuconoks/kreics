@@ -68,7 +68,7 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
         </div>
 
         <div id="nav" className="p-0 text-left block w-auto static">
-          <ul id="nav-links" className="gap-y-10 lg:gap-y-0">
+          <ul id="nav-links">
             {sectionText.map((item) => (
               <li key={item.id} className="nav-link hidden lg:block">
                 <Link href={item.url} target={item.isExternal ? "_blank" : ''}>
@@ -93,7 +93,7 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
 							</ul>
 						</div> */}
 
-            <li className="mb-12 lg:mb-4">
+            <li className="mt-4">
               <a
                 href="https://www.instagram.com/kreicsfilms/"
                 target="_blank"
@@ -103,7 +103,7 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
                 <Image
                   className="mx-auto lg:mx-0 "
                   alt="Instagram logo"
-                  src="./instagram.svg"
+                  src="/instagram.svg"
                   width={30}
                   height={30}
                 />
