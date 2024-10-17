@@ -4,7 +4,8 @@
   "info": {
     "singularName": "video",
     "pluralName": "videos",
-    "displayName": "video"
+    "displayName": "video",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

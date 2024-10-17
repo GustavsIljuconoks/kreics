@@ -1,24 +1,71 @@
-export default function ProjectPage() {
-    return (
-        <div id="content" className="w-full px-8 pt-20 pb-16 md:px-16 xl:px-32">
-            <div className="lg:flex w-full">
+'use client';
 
-                <div className="w-full lg:w-5/6 text-center">
-                    <div className="project-module w-full bg-black-10 mb-8">
-                        {/* <img
-                            src={propsData.thumbnail}
-                            srcSet={propsData.thumbnail}
-                        /> */}
-                    </div>
+import { BASE_URL, EVENT } from "@/lib/definitions";
+import { getStrapiData } from "@/lib/serverUtil";
+import { StrapiImage } from "@/app/components/StrapiImage";
+import { BlocksContent } from "@strapi/blocks-react-renderer";
+import { useEffect, useState } from "react";
 
-                    <div className="description mb-32 p-6 text-start lg:mb-56 lg:p-0">
-                        {/* <h1 className="text-2xl font-bold mb-4">
-                            {propsData.eventName}
-                        </h1>
-                        <p>{propsData.description}</p> */}
+interface ProjectPageParams {
+    params: {
+        name: string;
+    };
+}
+
+export default function Page({ params }: ProjectPageParams) {
+    const { name } = params;
+    let [events, setEvents] = useState(null);
+
+    useEffect(() => {
+        async function fetchEvents() {
+            const events = await getStrapiData("/api/video", name);
+            setEvents(events);
+        }
+
+        fetchEvents();
+
+    }, []);
+    
+    if (!events) return <div>Loading...</div>
+    let event: EVENT = events[0];
+
+    if (event) {
+        return (
+            <div id="content" className="w-full px-8 pt-20 pb-16 md:px-16 xl:px-32">
+                <div className="lg:flex w-full">
+    
+                    <div className="w-full lg:w-5/6 text-center">
+                        <div className="project-module w-full bg-black-10 mb-8">
+                            <StrapiImage 
+                                src={BASE_URL + event.thumbnail.url}
+                                alt={event.thumbnail.alternativeText}
+                                width={1000}
+                                height={1000}
+                            />
+                        </div>
+    
+                        <div className="description mb-32 p-6 text-start lg:mb-56 lg:p-0">
+                            <h1 className="text-2xl font-bold mb-4">
+                                {event.name}
+                            </h1>
+                            <p>{event.description}</p>
+                        </div>
+
+                        {event.media.data?.map((image: any, idx: number) => (
+                            <div key={idx}>
+                                <StrapiImage
+                                    src={BASE_URL + image.url}
+                                    alt={image.alternativeText}
+                                    width={1000}
+                                    height={1000}
+                                    type={image.mime.includes('image') ? "image" : "video"}
+                                    className="my-4 cursor-pointer"
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }

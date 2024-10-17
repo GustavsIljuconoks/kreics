@@ -21,7 +21,6 @@ export default function BlockRendererClient({
         paragraph: ({ children }) => <p className="text-neutral900 max-w-prose">{children}</p>,
         link: ({ children, url }) => <Link href={url}>{children}</Link>,
         image: ({ image }) => {
-          console.log(image);
           return (
             <StrapiImage
               src={image.url}

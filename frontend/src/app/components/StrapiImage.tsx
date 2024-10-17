@@ -6,6 +6,7 @@ interface StrapiImageProps {
   alt: string;
   height: number;
   width: number;
+  type?: "image" | "video";
   className?: string;
   onClick?: () => void;
 }
@@ -15,6 +16,7 @@ export function StrapiImage({
   alt,
   height,
   width,
+  type,
   className,
   onClick,
 }: Readonly<StrapiImageProps>) {
@@ -22,14 +24,25 @@ export function StrapiImage({
   const imageUrl = getStrapiMedia(src);
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
-  return (
-    <Image
-      src={imageUrl ?? imageFallback}
-      alt={alt}
-      height={height}
-      width={width}
-      className={className}
-      onClick={onClick}
-    />
-  );
+  if (type == "video") {
+    return (
+      <video controls
+        src={imageUrl ?? imageFallback}
+        height="auto"
+        width="auto"
+        className={className}
+      />
+    );
+  } else {
+    return (
+      <Image
+        src={imageUrl ?? imageFallback}
+        alt={alt}
+        height={height}
+        width={width}
+        className={className}
+        onClick={onClick}
+      />
+    );
+  }
 }

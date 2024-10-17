@@ -913,6 +913,7 @@ export interface ApiPhotoPhoto extends Schema.SingleType {
     singularName: 'photo';
     pluralName: 'photos';
     displayName: 'photo';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -943,6 +944,7 @@ export interface ApiVideoVideo extends Schema.SingleType {
     singularName: 'video';
     pluralName: 'videos';
     displayName: 'video';
+    description: '';
   };
   options: {
     draftAndPublish: true;
