@@ -3,7 +3,6 @@
 import { BASE_URL, EVENT } from "@/lib/definitions";
 import { getStrapiData } from "@/lib/serverUtil";
 import { StrapiImage } from "@/app/components/StrapiImage";
-import { BlocksContent } from "@strapi/blocks-react-renderer";
 import { useEffect, useState } from "react";
 
 interface ProjectPageParams {
