@@ -1,4 +1,4 @@
-import NavBar from "@/ui/nav-bar";
+import NavBar from '@/ui/nav-bar';
 
 export default function Page() {
   return (
@@ -9,9 +9,7 @@ export default function Page() {
         <div className="lg:w-5/6 text-center ml-5">
           <div className="description mb-36">
             <h1 className="text-3xl font-bold mb-24">Vēlies iepozēt?</h1>
-            <p className="text-2xl font-medium">
-              Aizpildi formu, lai es varu uzzināt vairāk par tavām idejām.
-            </p>
+            <p className="text-2xl font-medium">Aizpildi formu, lai es varu uzzināt vairāk par tavām idejām.</p>
           </div>
 
           <div className="form">
@@ -59,10 +57,7 @@ export default function Page() {
             </div>
 
             <a id="mailSubmit">
-              <button
-                className="rounded-full py-3 bg-orange w-full text-center text-white-ish"
-                type="submit"
-              >
+              <button className="rounded-full py-3 bg-orange w-full text-center text-white-ish" type="submit">
                 Nosūtīt ziņu
               </button>
             </a>

@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import NavBar from "@/ui/nav-bar";
-import { getGlobalData } from "@/data/loaders";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import NavBar from '@/ui/nav-bar';
+import { getGlobalData } from '@/data/loaders';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
     template: '%s | Kreics',
     default: 'Kreics',
   },
-  description: "Portfolio website showcasing various works by Kreics",
+  description: 'Portfolio website showcasing various works by Kreics',
 };
 
 export default async function RootLayout({
@@ -19,7 +19,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const globalData = await getGlobalData();
 
   return (

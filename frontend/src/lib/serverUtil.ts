@@ -1,15 +1,18 @@
 const qs = require('qs');
-import { BASE_URL } from "./definitions";
-import { flattenAttributes } from "./utils";
+import { BASE_URL } from './definitions';
+import { flattenAttributes } from './utils';
 
 export async function getStrapiData(path: string, eventName: string) {
-    const query = qs.stringify({
-        populate: {
-            event: {
-                populate: '*',
-            },
-        }
-    }, { encodeValuesOnly: true });
+  const query = qs.stringify(
+    {
+      populate: {
+        event: {
+          populate: '*',
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
 
   const res = await fetch(`${BASE_URL}${path}?${query}`);
 
@@ -21,7 +24,9 @@ export async function getStrapiData(path: string, eventName: string) {
   const data = await res.json();
   const flattenedData = flattenAttributes(data);
 
-  const filteredEvents = flattenedData.event.filter((event: { name: string; }) => event.name === decodeURIComponent(eventName));
+  const filteredEvents = flattenedData.event.filter(
+    (event: { name: string }) => event.name === decodeURIComponent(eventName),
+  );
 
   return filteredEvents;
 }

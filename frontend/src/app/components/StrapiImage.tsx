@@ -1,38 +1,23 @@
-import Image from "next/image";
-import { getStrapiMedia } from "@/lib/utils";
+import Image from 'next/image';
+import { getStrapiMedia } from '@/lib/utils';
 
 interface StrapiImageProps {
   src: string;
   alt: string;
   height: number;
   width: number;
-  type?: "image" | "video";
+  type?: 'image' | 'video';
   className?: string;
   onClick?: () => void;
 }
 
-export function StrapiImage({
-  src,
-  alt,
-  height,
-  width,
-  type,
-  className,
-  onClick,
-}: Readonly<StrapiImageProps>) {
+export function StrapiImage({ src, alt, height, width, type, className, onClick }: Readonly<StrapiImageProps>) {
   if (!src) return null;
   const imageUrl = getStrapiMedia(src);
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
-  if (type == "video") {
-    return (
-      <video controls
-        src={imageUrl ?? imageFallback}
-        height="auto"
-        width="auto"
-        className={className}
-      />
-    );
+  if (type == 'video') {
+    return <video controls src={imageUrl ?? imageFallback} height="auto" width="auto" className={className} />;
   } else {
     return (
       <Image
