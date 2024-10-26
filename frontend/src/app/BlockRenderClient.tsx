@@ -11,7 +11,7 @@ export default function BlockRendererClient({ content }: { readonly content: Blo
     <BlocksRenderer
       content={content}
       blocks={{
-        paragraph: ({ children }) => <p className="text-neutral900 max-w-prose">{children}</p>,
+        paragraph: ({ children }) => <p className="text-neutral900">{children}</p>,
         link: ({ children, url }) => <Link href={url}>{children}</Link>,
         image: ({ image }) => {
           return (
