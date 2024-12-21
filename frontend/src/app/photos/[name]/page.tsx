@@ -5,7 +5,7 @@ import { StrapiImage } from '../../components/StrapiImage';
 import Masonry from 'react-masonry-css';
 import ScrollButton from '@/app/components/ScrollButton';
 import { useEffect, useState } from 'react';
-import { getStrapiData } from '@/lib/serverUtil';
+import { getStrapiEventData } from '@/lib/serverUtil';
 
 interface ProjectPageParams {
   params: {
@@ -19,7 +19,7 @@ export default function Page({ params }: ProjectPageParams) {
 
   useEffect(() => {
     async function fetchEvents() {
-      const events = await getStrapiData('/api/photo', name);
+      const events = await getStrapiEventData('/api/photo', name);
       setEvents(events);
     }
 

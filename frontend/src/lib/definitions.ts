@@ -10,3 +10,10 @@ export interface EVENT {
   tags: string[];
   media: any;
 }
+
+export interface IFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import { BASE_URL, EVENT } from '@/lib/definitions';
-import { getStrapiData } from '@/lib/serverUtil';
+import { getStrapiEventData } from '@/lib/serverUtil';
 import { StrapiImage } from '@/app/components/StrapiImage';
 import { useEffect, useState } from 'react';
 
@@ -17,7 +17,7 @@ export default function Page({ params }: ProjectPageParams) {
 
   useEffect(() => {
     async function fetchEvents() {
-      const events = await getStrapiData('/api/video', name);
+      const events = await getStrapiEventData('/api/video', name);
       setEvents(events);
     }
 

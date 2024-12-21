@@ -2,7 +2,7 @@ const qs = require('qs');
 import { BASE_URL } from './definitions';
 import { flattenAttributes } from './utils';
 
-export async function getStrapiData(path: string, eventName: string) {
+export async function getStrapiEventData(path: string, eventName: string) {
   const query = qs.stringify(
     {
       populate: {
@@ -29,4 +29,17 @@ export async function getStrapiData(path: string, eventName: string) {
   );
 
   return filteredEvents;
+}
+
+export async function getStrapiData(path: string) {
+  const res = await fetch(BASE_URL + path + '?populate=*');
+
+  if (!res.ok) {
+    console.error(`Error: ${res.status} - ${res.statusText}`);
+    return null;
+  }
+
+  const data = await res.json();
+  const flattenedData = flattenAttributes(data);
+  return flattenedData;
 }
