@@ -36,6 +36,7 @@ export default function Page({ params }: ProjectPageParams) {
           <div className="w-full lg:w-5/6 text-center">
             <div className="project-module w-full bg-black-10 mb-8">
               <StrapiImage
+                className="my-4 max-w-max md:max-w-full"
                 src={BASE_URL + event.thumbnail.url}
                 alt={event.thumbnail.alternativeText}
                 width={1000}

@@ -9,39 +9,68 @@
 }
 
 @layer components {
-    .nav-link {
-        @apply font-bold text-[20px] text-orange;
-    }
+  .nav-link {
+    @apply font-bold text-[20px] text-orange;
+  }
 
-    .page-collection {
-        @apply text-black-70 font-semibold ml-2;
-    }
+  .page-collection {
+    @apply text-black-70 font-semibold ml-2;
+  }
 
-    .cover-container {
-        @apply bg-black-10 mb-2 relative md:mt-0;
-    }
+  .cover-container {
+    @apply bg-black-10 mb-2 relative md:mt-0;
+  }
 
-    .details-wrap {
-        @apply py-[5%] h-full w-11/12 left-1/2 -translate-x-1/2 opacity-0 absolute top-0 transition ease-in;
-    }
+  .details-wrap {
+    @apply py-[5%] h-full w-11/12 left-1/2 -translate-x-1/2 opacity-0 absolute top-0 transition ease-in;
+  }
 
-    .details {
-        @apply relative h-full w-full bg-orange-light flex items-center opacity-70 transition-opacity;
-    }
+  .details {
+    @apply relative h-full w-full bg-orange-light flex items-center opacity-70 transition-opacity;
+  }
 
-    .project-cover:hover .details-wrap {
-        @apply opacity-100;
-    }
+  .project-cover:hover .details-wrap {
+    @apply opacity-100;
+  }
 
-    @keyframes fadeIn {
-        from {opacity: 0}
-        to {opacity: 1}
+  .work {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1em;
+    text-decoration: none;
+    color: #f1f1f1;
+
+    figcaption {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items: flex-start;
+      padding-left: 10px;
+      justify-content: center;
+      flex-direction: column;
+      -webkit-transition: background-color 0.3s;
+      transition: background-color 0.3s;
+      font-size: 1.3em;
     }
-      
-    .fadeInAnimated {
-        opacity: 0;
-        animation: fadeIn 2s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
     }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .fadeInAnimated {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+  }
 }
 
 .hamburger-react {

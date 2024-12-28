@@ -36,7 +36,7 @@ export interface ComponentsGallery extends Schema.Component {
     name: Attribute.String;
     description: Attribute.Text;
     media: Attribute.Media<'images' | 'videos', true>;
-    thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    thumbnail: Attribute.Media<'images' | 'videos'> & Attribute.Required;
     tag: Attribute.Relation<
       'components.gallery',
       'oneToOne',

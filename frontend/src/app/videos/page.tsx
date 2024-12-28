@@ -35,6 +35,7 @@ export default async function Page() {
               name={event.name}
               description={event.description}
               type={event.tag.type}
+              thumbnailType={event.thumbnail.mime.includes('image') ? 'photo' : 'video'}
             />
           ))}
         </div>

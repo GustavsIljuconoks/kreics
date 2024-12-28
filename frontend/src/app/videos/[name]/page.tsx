@@ -33,12 +33,16 @@ export default function Page({ params }: ProjectPageParams) {
         <div className="lg:flex flex-col items-center w-full">
           <div className="w-full lg:w-5/6 text-center">
             <div className="project-module w-full bg-black-10 mb-8">
-              <StrapiImage
-                src={BASE_URL + event.thumbnail.url}
-                alt={event.thumbnail.alternativeText}
-                width={1000}
-                height={1000}
-              />
+              {event.thumbnail.mime.includes('video') ? (
+                <video autoPlay muted loop src={BASE_URL + event.thumbnail.url} height="auto" width="auto" />
+              ) : (
+                <StrapiImage
+                  src={BASE_URL + event.thumbnail.url}
+                  alt={event.thumbnail.alternativeText}
+                  width={1000}
+                  height={1000}
+                />
+              )}
             </div>
 
             <div className="description mb-32 p-6 text-start lg:p-0">
