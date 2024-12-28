@@ -31,8 +31,8 @@ export default function Page({ params }: ProjectPageParams) {
 
   if (event) {
     return (
-      <div id="content" className="w-full px-8 pt-20 pb-16 md:px-16 xl:px-32">
-        <div className="lg:flex w-full">
+      <div id="content" className="w-full pb-16 xl:px-32">
+        <div className="lg:flex flex-col items-center w-full">
           <div className="w-full lg:w-5/6 text-center">
             <div className="project-module w-full bg-black-10 mb-8">
               <StrapiImage
@@ -43,9 +43,9 @@ export default function Page({ params }: ProjectPageParams) {
               />
             </div>
 
-            <div className="description mb-32 p-6 text-start lg:mb-56 lg:p-0">
-              <h1 className="text-2xl font-bold mb-4">{event.name}</h1>
-              <p>{event.description}</p>
+            <div className="description mb-32 p-6 text-start lg:p-0">
+              <h1 className="text-3xl font-bold mb-4 text-orange">{event.name}</h1>
+              <p className="text-justify">{event.description}</p>
             </div>
 
             <Masonry breakpointCols={{ default: 3, 1024: 1, 1600: 2 }} className="flex gap-2">

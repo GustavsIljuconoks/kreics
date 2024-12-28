@@ -1,6 +1,6 @@
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { StrapiImage } from '@/app/components/StrapiImage';
 import { flattenAttributes } from '@/lib/utils';
+import BlockRendererClient from '../BlockRenderClient';
 
 const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
@@ -23,13 +23,14 @@ export default async function Page() {
   const imageUrl = baseUrl + thumbnail.url;
 
   return (
-    <div className="lg:w-5/6 text-left">
-      <div className="text-start text-md lg:text-xl px-10">
-        <div id="bio-section" className="mt-6">
-          <div className="flex justify-start mb-6">
-            <StrapiImage src={imageUrl} alt={thumbnail.alternativeText} className="my-4" width={1000} height={100} />
-          </div>
-          <BlocksRenderer content={description} />
+    <div className="lg:w-5/6 flex flex-col items-center">
+      <div id="bio-section" className="flex flex-col items-center justify-center mt-6 max-w-[1024px]">
+        <div className="mb-6">
+          <StrapiImage src={imageUrl} alt={thumbnail.alternativeText} width={1024} height={100} />
+        </div>
+
+        <div className="prose mx-auto text-justify">
+          <BlockRendererClient content={description} />
         </div>
       </div>
     </div>
