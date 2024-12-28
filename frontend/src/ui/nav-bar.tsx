@@ -73,16 +73,35 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
 							</ul>
 						</div> */}
 
-            <li className="mt-4">
-              <a
-                href="https://www.instagram.com/kreicsfilms/"
-                target="_blank"
-                rel="noreferrer"
-                className="hidden lg:block"
-              >
-                <Image className="mx-auto lg:mx-0 " alt="Instagram logo" src="/instagram.svg" width={30} height={30} />
-              </a>
-            </li>
+            <div className="flex flex-row gap-2 items-center">
+              <li className="mt-4">
+                <a
+                  href="https://www.instagram.com/kreicsfilms/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hidden lg:block"
+                >
+                  <Image
+                    className="mx-auto lg:mx-0 "
+                    alt="Instagram logo"
+                    src="/instagram.svg"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </li>
+
+              <li className="mt-4">
+                <a
+                  href="https://www.youtube.com/channel/UCVxL93fPm0rDP31Nbh7hlVg"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hidden lg:block"
+                >
+                  <Image className="mx-auto lg:mx-0 " alt="Instagram logo" src="/youtube.svg" width={30} height={30} />
+                </a>
+              </li>
+            </div>
           </ul>
         </div>
 
