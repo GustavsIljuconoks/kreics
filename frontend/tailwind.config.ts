@@ -1,32 +1,30 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     fontFamily: {
-      sans: ['Jost', 'sans-serif']
+      sans: ['Jost', 'sans-serif'],
     },
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
       '2xl': '1536px',
     },
     extend: {
       colors: {
-        'orange': '#FF7B00',
+        orange: '#fe5100',
         'orange-light': '#FFEDD5',
-        'error': '#FF0000',
+        error: '#FF0000',
         'white-ish': '#F8F8F8',
-        'black': {
+        black: {
           100: '#000000',
           90: '#00000090',
           70: '#00000070',
           40: '#00000040',
-          10: '#00000010'
+          10: '#00000010',
         },
       },
       spacing: {
@@ -36,7 +34,7 @@ const config: Config = {
       },
       fontSize: {
         '2.5xl': '1.7rem',
-      }
+      },
     },
   },
   variants: {
