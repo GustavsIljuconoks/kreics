@@ -27,6 +27,7 @@ export function StrapiImage({ src, alt, height, width, type, className, onClick 
         width={width}
         className={className}
         onClick={onClick}
+        loading="eager"
       />
     );
   }
