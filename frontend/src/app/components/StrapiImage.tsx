@@ -22,11 +22,12 @@ export function StrapiImage({ src, alt, height, width, type, className, onClick 
     return (
       <Image
         src={imageUrl ?? imageFallback}
-        alt={alt}
+        alt={alt ?? 'image taken by kreics'}
         height={height}
         width={width}
         className={className}
         onClick={onClick}
+        loading="eager"
       />
     );
   }

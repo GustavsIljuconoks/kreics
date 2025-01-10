@@ -6,6 +6,9 @@ import Masonry from 'react-masonry-css';
 import ScrollButton from '@/app/components/ScrollButton';
 import { useEffect, useState } from 'react';
 import { getStrapiEventData } from '@/lib/serverUtil';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import LightBoxImage from '@/app/components/LightBoxImage';
 
 interface ProjectPageParams {
   params: {
@@ -16,6 +19,8 @@ interface ProjectPageParams {
 export default function Page({ params }: ProjectPageParams) {
   const { name } = params;
   const [events, setEvents] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     async function fetchEvents() {
@@ -53,6 +58,10 @@ export default function Page({ params }: ProjectPageParams) {
               {event.media.data?.map((image: any, idx: number) => (
                 <div key={idx}>
                   <StrapiImage
+                    onClick={() => {
+                      setCurrentIndex(idx);
+                      setOpen(true);
+                    }}
                     src={BASE_URL + image.url}
                     alt={image.alternativeText}
                     width={1000}
@@ -62,6 +71,18 @@ export default function Page({ params }: ProjectPageParams) {
                 </div>
               ))}
             </Masonry>
+
+            <Lightbox
+              open={open}
+              close={() => setOpen(false)}
+              index={currentIndex}
+              slides={event.media.data.map((image: any) => ({
+                src: BASE_URL + image.url,
+                alt: image.alternativeText,
+              }))}
+              render={{ slide: LightBoxImage }}
+            />
+
             <ScrollButton />
           </div>
         </div>
