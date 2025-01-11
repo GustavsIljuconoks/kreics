@@ -38,7 +38,7 @@ export default async function Page() {
   return (
     <div className="lg:w-5/6 text-center lg:ml-2">
       <section id="photo-showcase" className="w-full md:flex flex-wrap items-start">
-        <h1 className="project-type text-[30vw] lg:text-[5vw]">photos</h1>
+        <h1 className="project-type ml-[-30px] lg:ml-0 text-[32vw] lg:text-[5vw] -tracking-[0.09em]">photos</h1>
 
         <div className="image-collection-container md:-mt-[6.5rem] lg:grid-cols-2 lg:mt-0">
           {event?.map((event: any) => (

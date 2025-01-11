@@ -57,22 +57,6 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
               </li>
             ))}
 
-            {/* <div
-							id="subnav"
-							className="subnav mb-4">
-							<ul>
-								{docs?.map((doc, idx) => (
-									<li
-										className="page-collection mb-2"
-										key={idx}>
-										{doc.project}
-
-										<WorkList data={doc} />
-									</li>
-								))}
-							</ul>
-						</div> */}
-
             <div className="flex flex-row gap-2 items-center">
               <li className="mt-4">
                 <a
