@@ -4,8 +4,8 @@ import { getStrapiMedia } from '@/lib/utils';
 interface StrapiImageProps {
   src: string;
   alt: string;
-  height: number;
-  width: number;
+  height?: number;
+  width?: number;
   type?: 'image' | 'video';
   className?: string;
   onClick?: () => void;
@@ -23,11 +23,12 @@ export function StrapiImage({ src, alt, height, width, type, className, onClick 
       <Image
         src={imageUrl ?? imageFallback}
         alt={alt ?? 'image taken by kreics'}
-        height={height}
-        width={width}
-        className={className}
+        height={height ?? 0}
+        width={width ?? 0}
+        className={`${className} w-full h-auto`}
         onClick={onClick}
         loading="eager"
+        sizes="100vw"
       />
     );
   }

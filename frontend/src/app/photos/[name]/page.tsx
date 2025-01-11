@@ -44,8 +44,6 @@ export default function Page({ params }: ProjectPageParams) {
                 className="my-4 max-w-max md:max-w-full"
                 src={BASE_URL + event.thumbnail.url}
                 alt={event.thumbnail.alternativeText}
-                width={1000}
-                height={1000}
               />
             </div>
 
