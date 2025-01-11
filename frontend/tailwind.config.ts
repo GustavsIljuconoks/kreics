@@ -4,7 +4,7 @@ const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     fontFamily: {
-      sans: ['Jost', 'sans-serif'],
+      sans: ['SpaceGrotesk', 'sans-serif'],
     },
     screens: {
       sm: '640px',
