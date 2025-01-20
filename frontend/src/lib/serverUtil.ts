@@ -1,4 +1,4 @@
-const qs = require('qs');
+import qs from 'qs';
 import { BASE_URL } from './definitions';
 import { flattenAttributes } from './utils';
 

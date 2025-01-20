@@ -1,8 +1,8 @@
 import { flattenAttributes } from '@/lib/utils';
 import { Thumbnail } from '@/app/components/Thumbnail';
 import { BASE_URL } from '@/lib/definitions';
+import qs from 'qs';
 
-const qs = require('qs');
 const query = qs.stringify(
   {
     populate: {

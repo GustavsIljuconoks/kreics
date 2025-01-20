@@ -6,6 +6,7 @@ export interface EVENT {
   thumbnail: {
     url: string;
     alternativeText: string;
+    mime: string;
   };
   tags: string[];
   media: any;
