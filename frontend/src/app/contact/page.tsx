@@ -61,7 +61,7 @@ export default function Page() {
       if (response.success) {
         setSubmissionStatus('Form submitted successfully!');
       } else {
-        setSubmissionStatus(`Error: ${response.error}`);
+        setSubmissionStatus(`Error: ${response.message}`);
       }
     }
   };
@@ -132,7 +132,7 @@ export default function Page() {
             </label>
             <textarea
               id="message"
-              rows="4"
+              rows={4}
               className="bg-black-10 border border-black-10 text-gray-900 rounded-lg focus:border-black-100 focus:bg-white-ish p-2.5 w-full text-sm"
               placeholder="Hello! I would like to discuss a project with you."
               required
