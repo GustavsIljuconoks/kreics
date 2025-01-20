@@ -1,11 +1,10 @@
 import { flattenAttributes } from '@/lib/utils';
 import { StrapiImage } from '@/app/components/StrapiImage';
 import BlockRendererClient from '@/app/BlockRenderClient';
-
-const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+import { BASE_URL } from '@/lib/definitions';
 
 async function getStrapiData(path: string) {
-  const res = await fetch(baseUrl + path + '?populate=*');
+  const res = await fetch(BASE_URL + path + '?populate=*');
 
   if (!res.ok) {
     console.error(`Error: ${res.status} - ${res.statusText}`);
@@ -20,7 +19,10 @@ async function getStrapiData(path: string) {
 export default async function Page() {
   const strapiData = await getStrapiData('/api/home');
   const { heading, description, heroImage, linkText } = strapiData;
-  const imageUrl = baseUrl + heroImage.url;
+
+  const imageUrl = heroImage.url;
+  const imageWidth = heroImage.formats.medium?.width || heroImage.width;
+  const imageHeight = heroImage.formats.medium?.height || heroImage.height;
 
   return (
     <div className="lg:w-5/6 text-center">
@@ -31,8 +33,8 @@ export default async function Page() {
           src={imageUrl}
           alt={heroImage.alternativeText}
           className="my-4 max-w-max md:max-w-full"
-          width={1080}
-          height={720}
+          width={imageWidth}
+          height={imageHeight}
         />
       </div>
 

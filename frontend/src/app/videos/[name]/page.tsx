@@ -1,6 +1,6 @@
 'use client';
 
-import { BASE_URL, EVENT } from '@/lib/definitions';
+import { EVENT } from '@/lib/definitions';
 import { getStrapiEventData } from '@/lib/serverUtil';
 import { StrapiImage } from '@/app/components/StrapiImage';
 import { useEffect, useState } from 'react';
@@ -34,10 +34,10 @@ export default function Page({ params }: ProjectPageParams) {
           <div className="w-full lg:w-5/6 text-center">
             <div className="project-module w-full bg-black-10 mb-8">
               {event.thumbnail.mime.includes('video') ? (
-                <video autoPlay muted loop src={BASE_URL + event.thumbnail.url} height="auto" width="auto" />
+                <video autoPlay muted loop src={event.thumbnail.url} height="auto" width="auto" />
               ) : (
                 <StrapiImage
-                  src={BASE_URL + event.thumbnail.url}
+                  src={event.thumbnail.url}
                   alt={event.thumbnail.alternativeText}
                   width={1000}
                   height={1000}
@@ -53,7 +53,7 @@ export default function Page({ params }: ProjectPageParams) {
             {event.media.data?.map((image: any, idx: number) => (
               <div key={idx}>
                 <StrapiImage
-                  src={BASE_URL + image.url}
+                  src={image.url}
                   alt={image.alternativeText}
                   width={1000}
                   height={1000}

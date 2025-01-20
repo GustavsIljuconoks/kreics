@@ -30,7 +30,7 @@ export default async function Page() {
           {event?.map((event: any) => (
             <Thumbnail
               key={event.id}
-              imageSrc={baseUrl + event.thumbnail.url}
+              imageSrc={event.thumbnail.url}
               imageAlt={event.thumbnail.alternativeText}
               name={event.name}
               description={event.description}

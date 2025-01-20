@@ -1,6 +1,6 @@
 'use client';
 
-import { BASE_URL, EVENT } from '@/lib/definitions';
+import { EVENT } from '@/lib/definitions';
 import { StrapiImage } from '../../components/StrapiImage';
 import Masonry from 'react-masonry-css';
 import ScrollButton from '@/app/components/ScrollButton';
@@ -42,7 +42,7 @@ export default function Page({ params }: ProjectPageParams) {
             <div className="project-module w-full bg-black-10 mb-8">
               <StrapiImage
                 className="my-4 max-w-max md:max-w-full"
-                src={BASE_URL + event.thumbnail.url}
+                src={event.thumbnail.url}
                 alt={event.thumbnail.alternativeText}
               />
             </div>
@@ -60,7 +60,7 @@ export default function Page({ params }: ProjectPageParams) {
                       setCurrentIndex(idx);
                       setOpen(true);
                     }}
-                    src={BASE_URL + image.url}
+                    src={image.url}
                     alt={image.alternativeText}
                     width={1000}
                     height={1000}
@@ -75,7 +75,7 @@ export default function Page({ params }: ProjectPageParams) {
               close={() => setOpen(false)}
               index={currentIndex}
               slides={event.media.data.map((image: any) => ({
-                src: BASE_URL + image.url,
+                src: image.url,
                 alt: image.alternativeText,
               }))}
               render={{ slide: LightBoxImage }}

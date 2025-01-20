@@ -1,7 +1,6 @@
 import { flattenAttributes } from '@/lib/utils';
 import { Thumbnail } from '@/app/components/Thumbnail';
-
-const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+import { BASE_URL } from '@/lib/definitions';
 
 const qs = require('qs');
 const query = qs.stringify(
@@ -18,7 +17,7 @@ const query = qs.stringify(
 );
 
 async function getStrapiData(path: string) {
-  const res = await fetch(`${baseUrl}${path}?${query}`);
+  const res = await fetch(`${BASE_URL}${path}?${query}`);
 
   if (!res.ok) {
     console.error(`Error: ${res.status} - ${res.statusText}`);
@@ -44,12 +43,12 @@ export default async function Page() {
           {event?.map((event: any) => (
             <Thumbnail
               key={event.id}
-              imageSrc={baseUrl + event.thumbnail.url}
+              imageSrc={event.thumbnail.url}
               imageAlt={event.thumbnail.alternativeText}
               name={event.name}
               description={event.description}
               type={event.tag.type}
-              thumbnailType={event.thumbnail.mime.includes('image') ? 'photo' : 'video'}
+              thumbnailType={event.thumbnail?.mime?.includes('image') ? 'photo' : 'video'}
             />
           ))}
         </div>
