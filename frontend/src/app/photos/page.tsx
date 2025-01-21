@@ -17,17 +17,22 @@ const query = qs.stringify(
 );
 
 async function getStrapiData(path: string) {
-  const res = await fetch(`${BASE_URL}${path}?${query}`);
+  try {
+    const res = await fetch(`${BASE_URL}${path}?${query}`);
 
-  if (!res.ok) {
-    console.error(`Error: ${res.status} - ${res.statusText}`);
-    return null;
+    if (!res.ok) {
+      console.error(`Error: ${res.status} - ${res.statusText}`);
+      return null;
+    }
+
+    const data = await res.json();
+
+    const flattenedData = flattenAttributes(data);
+    return flattenedData;
+  } catch (error) {
+    console.error('Error fetching Strapi data:', error);
+    return { event: [] };
   }
-
-  const data = await res.json();
-
-  const flattenedData = flattenAttributes(data);
-  return flattenedData;
 }
 
 export default async function Page() {

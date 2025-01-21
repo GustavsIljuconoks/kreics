@@ -1,25 +1,43 @@
 import { flattenAttributes } from '@/lib/utils';
 import { Thumbnail } from '@/app/components/Thumbnail';
+import { BASE_URL } from '@/lib/definitions';
 
-const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+import qs from 'qs';
+
+const query = qs.stringify(
+  {
+    populate: {
+      event: {
+        populate: '*',
+      },
+    },
+  },
+  {
+    encodeValuesOnly: true,
+  },
+);
 
 async function getStrapiData(path: string) {
-  const res = await fetch(baseUrl + path + '?populate[event][populate]=*');
+  try {
+    const res = await fetch(`${BASE_URL}${path}?${query}`, {
+      next: { revalidate: 3600 }, // Cache for 1 hour
+    });
 
-  if (!res.ok) {
-    console.error(`Error: ${res.status} - ${res.statusText}`);
-    return null;
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} - ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return flattenAttributes(data);
+  } catch (error) {
+    console.error('Error fetching Strapi data:', error);
+    return { event: [] };
   }
-
-  const data = await res.json();
-
-  const flattenedData = flattenAttributes(data);
-  return flattenedData;
 }
 
 export default async function Page() {
   const strapiData = await getStrapiData('/api/video');
-  const { event } = strapiData;
+  const { event = [] } = strapiData || {};
 
   return (
     <div className="lg:w-5/6 text-center lg:ml-2">
@@ -30,12 +48,12 @@ export default async function Page() {
           {event?.map((event: any) => (
             <Thumbnail
               key={event.id}
-              imageSrc={event.thumbnail.url}
-              imageAlt={event.thumbnail.alternativeText}
-              name={event.name}
-              description={event.description}
-              type={event.tag.type}
-              thumbnailType={event.thumbnail.mime.includes('image') ? 'photo' : 'video'}
+              imageSrc={event.thumbnail?.url || ''}
+              imageAlt={event.thumbnail?.alternativeText || ''}
+              name={event.name || ''}
+              description={event.description || ''}
+              type={event.tag?.type || ''}
+              thumbnailType={event.thumbnail?.mime?.includes('image') ? 'photo' : 'video'}
             />
           ))}
         </div>
