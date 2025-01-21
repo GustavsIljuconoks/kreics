@@ -15,7 +15,7 @@ module.exports = {
   rules: {
     'prettier/prettier': [
       'error',
-      { useTabs: false, tabWidth: 2, printWidth: 120, singleQuote: true, endOfLine: 'crlf' },
+      { useTabs: false, tabWidth: 2, printWidth: 120, singleQuote: true, endOfLine: 'auto' },
     ],
     '@typescript-eslint/no-require-imports': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
