@@ -25,7 +25,7 @@ export async function sendEmail(formData: IFormData) {
     console.error('Failed to send email:', error);
     return {
       success: false,
-      message: error.message,
+      message: error instanceof Error ? error.message : 'An unknown error occurred',
     };
   }
 }
