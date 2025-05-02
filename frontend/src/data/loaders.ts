@@ -1,5 +1,6 @@
 import qs from 'qs';
 import { flattenAttributes } from '@/lib/utils';
+import { BASE_URL } from '@/lib/definitions';
 
 const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
@@ -24,7 +25,7 @@ async function fetchData(url: string) {
 }
 
 export async function getGlobalData() {
-  const url = new URL('/api/global', baseUrl);
+  const url = new URL(BASE_URL + '/global');
 
   url.search = qs.stringify({
     populate: ['header.logo', 'header.sectionText'],

@@ -18,6 +18,9 @@ async function getStrapiData(path: string) {
 
 export default async function Page() {
   const strapiData = await getStrapiData('/api/home');
+
+  if (!strapiData) return <p>Loading or error...</p>;
+
   const { heading, description, heroImage, linkText } = strapiData;
 
   const imageUrl = heroImage.url;

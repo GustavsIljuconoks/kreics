@@ -37,6 +37,7 @@ async function getStrapiData(path: string) {
 
 export default async function Page() {
   const strapiData = await getStrapiData('/api/video');
+  if (!strapiData) return <p>Loading or error...</p>;
   const { event = [] } = strapiData || {};
 
   return (

@@ -65,6 +65,7 @@ export default function Page() {
       }
     }
   };
+  if (!strapiData) return <p>Loading or error...</p>;
   const { title, form_description } = strapiData;
 
   return (
