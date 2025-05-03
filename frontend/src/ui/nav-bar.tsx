@@ -32,6 +32,8 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
   const hamburgerMenu = () => {
     setHamburger(!hamburger);
   };
+
+  if (!data) return <p>Loading or error...</p>;
   const { sectionText, logo } = data;
 
   return (

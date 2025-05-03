@@ -2,8 +2,6 @@ import qs from 'qs';
 import { flattenAttributes } from '@/lib/utils';
 import { BASE_URL } from '@/lib/definitions';
 
-const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-
 async function fetchData(url: string) {
   const authToken = null;
   const headers = {

@@ -41,5 +41,5 @@ export async function getStrapiData(path: string) {
 
   const data = await res.json();
   const flattenedData = flattenAttributes(data);
-  return flattenedData;
+  return flattenedData || {};
 }
