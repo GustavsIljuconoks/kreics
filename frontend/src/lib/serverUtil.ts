@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { BASE_URL } from './definitions';
+import { BASE_URL, API_TOKEN } from './definitions';
 import { flattenAttributes } from './utils';
 
 export async function getStrapiEventData(path: string, eventName: string) {
@@ -14,7 +14,11 @@ export async function getStrapiEventData(path: string, eventName: string) {
     { encodeValuesOnly: true },
   );
 
-  const res = await fetch(`${BASE_URL}${path}?${query}`);
+  const res = await fetch(`${BASE_URL}${path}?${query}`, {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+  });
 
   if (!res.ok) {
     console.error(`Error: ${res.status} - ${res.statusText}`);
@@ -32,7 +36,11 @@ export async function getStrapiEventData(path: string, eventName: string) {
 }
 
 export async function getStrapiData(path: string) {
-  const res = await fetch(BASE_URL + path + '?populate=*');
+  const res = await fetch(BASE_URL + path + '?populate=*', {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+  });
 
   if (!res.ok) {
     console.error(`Error: ${res.status} - ${res.statusText}`);

@@ -23,7 +23,7 @@ async function fetchData(url: string) {
 }
 
 export async function getGlobalData() {
-  const url = new URL(BASE_URL + '/global');
+  const url = new URL(BASE_URL + '/api/global');
 
   url.search = qs.stringify({
     populate: ['header.logo', 'header.sectionText'],
