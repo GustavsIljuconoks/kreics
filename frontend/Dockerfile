@@ -1,6 +1,10 @@
 # ---- Build Stage ----
 FROM node:18-alpine AS builder
 
+ENV NODE_ENV=production
+ARG NEXT_PUBLIC_RESEND_API_KEY
+ENV NEXT_PUBLIC_RESEND_API_KEY=${NEXT_PUBLIC_RESEND_API_KEY}
+
 # Set working directory
 WORKDIR /app
 COPY . .
@@ -15,8 +19,6 @@ RUN echo "Resend key: $NEXT_PUBLIC_RESEND_API_KEY"
 # Build the Next.js app
 RUN npm run build
 
-ENV NODE_ENV=production
-
 # ----------------------
 # Production image
 # ----------------------
@@ -29,8 +31,6 @@ COPY --from=builder /app ./
 
 # Expose the port Next.js uses
 EXPOSE 3000
-
-ENV NODE_ENV=production
 
 # Start the production server
 CMD ["npm", "start"]
