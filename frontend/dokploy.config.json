@@ -1,0 +1,4 @@
+{
+  "buildType": "docker",
+  "port": 3000
+}
