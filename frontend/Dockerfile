@@ -1,4 +1,4 @@
-# Use official Node.js image
+# ---- Build Stage ----
 FROM node:18-alpine AS builder
 
 # Set working directory
@@ -8,8 +8,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy rest of the project files
+# Copy everything else
 COPY . .
+
+# Copy your env file so Next.js has access during build
+COPY .env.production .env
 
 # Build the Next.js app
 RUN npm run build
