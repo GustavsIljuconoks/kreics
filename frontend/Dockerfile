@@ -11,6 +11,10 @@ RUN npm install
 # Copy everything else
 COPY . .
 
+# Accept build-time variable
+ARG RESEND_API_KEY
+ENV RESEND_API_KEY=$RESEND_API_KEY
+
 # Copy your env file so Next.js has access during build
 COPY .env.production .env
 

@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 import { ContactEmailTemplate } from '@/app/components/ContactEmailTemplate';
 import { IFormData } from './definitions';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY || '');
 
 export async function sendEmail(formData: IFormData) {
   try {
