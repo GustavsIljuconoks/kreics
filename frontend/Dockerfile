@@ -14,8 +14,6 @@ COPY .env.production .env
 COPY package*.json ./
 RUN npm install
 
-RUN echo "Resend key: $NEXT_PUBLIC_RESEND_API_KEY"
-
 # Build the Next.js app
 RUN npm run build
 
