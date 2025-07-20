@@ -1,7 +1,6 @@
 # ---- Build Stage ----
 FROM node:18-alpine AS builder
 
-ENV NODE_ENV=production
 ARG NEXT_PUBLIC_RESEND_API_KEY
 ENV NEXT_PUBLIC_RESEND_API_KEY=${NEXT_PUBLIC_RESEND_API_KEY}
 
