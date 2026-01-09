@@ -3,7 +3,7 @@ import { getStrapiMedia } from '@/lib/utils';
 
 interface StrapiImageProps {
   src: string;
-  alt: string;
+  alt: string | undefined;
   height?: number;
   width?: number;
   type?: 'image' | 'video';

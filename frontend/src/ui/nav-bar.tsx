@@ -5,7 +5,6 @@ import { Fade as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/nav-bar.module.css';
-import { StrapiImage } from '@/app/components/StrapiImage';
 
 interface LinkItem {
   id: number;
@@ -37,71 +36,66 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
   const { sectionText, logo } = data;
 
   return (
-    <aside className="lg:w-1/6 lg:h-screen">
-      <div className="w-full">
-        <div className="flex flex-row mb-4 justify-between items-center">
-          <button className="w-[120px] h-[120px] cursor-pointer">
+    <header className="w-full bg-white sticky top-0 z-50">
+      <div className="max-w-[1280px] mx-auto px-4 ">
+        <div className="flex flex-row justify-between items-center py-4 md:pt-20">
+          {/* Logo */}
+          <button className="w-[60px] h-[60px] cursor-pointer">
             <Link href={logo.url}>
-              <StrapiImage src="/next.svg" alt={logo.text} className="w-100 h-auto" width={100} height={100} />
+              <Image src="/instagram.svg" alt={logo.text} className="w-full h-auto" width={60} height={60} />
             </Link>
           </button>
 
-          <Hamburger toggled={hamburger} toggle={setHamburger} color="#FF7B00" rounded hideOutline={false} />
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-8">
+            <ul className="flex items-center space-x-8">
+              {sectionText.map((item) => (
+                <li key={item.id} className="nav-link">
+                  <Link href={item.url} target={item.isExternal ? '_blank' : ''}>
+                    {item.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Mobile Hamburger */}
+          <div className="lg:hidden">
+            <Hamburger toggled={hamburger} toggle={setHamburger} color="#FF7B00" rounded hideOutline={false} />
+          </div>
         </div>
 
-        <div id="nav" className="p-0 text-left block w-auto static">
-          <ul id="nav-links">
+        {/* Mobile Navigation */}
+        <div className={`${styles['mobile-nav']} ${hamburger ? styles['open-menu'] : styles['closed-menu']}`}>
+          <ul className="flex flex-col gap-6 list-none pb-4">
             {sectionText.map((item) => (
-              <li key={item.id} className="nav-link hidden lg:block">
-                <Link href={item.url} target={item.isExternal ? '_blank' : ''}>
+              <li key={item.id} className="nav-link" onClick={() => hamburgerMenu()}>
+                <Link href={item.url} className="text-gray-700 hover:text-orange-500 transition-colors">
                   {item.text}
                 </Link>
               </li>
             ))}
-
-            <div className="flex flex-row gap-2 items-center">
-              <li className="mt-4">
-                <a
-                  href="https://www.instagram.com/kreicsfilms/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hidden lg:block"
-                >
-                  <Image
-                    className="mx-auto lg:mx-0 "
-                    alt="Instagram logo"
-                    src="/instagram.svg"
-                    width={24}
-                    height={24}
-                  />
-                </a>
-              </li>
-
-              <li className="mt-4">
-                <a
-                  href="https://www.youtube.com/channel/UCVxL93fPm0rDP31Nbh7hlVg"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hidden lg:block"
-                >
-                  <Image className="mx-auto lg:mx-0 " alt="Instagram logo" src="/youtube.svg" width={30} height={30} />
-                </a>
-              </li>
-            </div>
-          </ul>
-        </div>
-
-        {/* mobile nav */}
-        <div className={`${styles['mobile-nav']} ${hamburger ? styles['open-menu'] : styles['closed-menu']}`}>
-          <ul className="flex flex-col gap-8 list-none">
-            {sectionText.map((item) => (
-              <li key={item.id} className="nav-link" onClick={() => hamburgerMenu()}>
-                <Link href={item.url}>{item.text}</Link>
-              </li>
-            ))}
+            <li className="flex items-center space-x-4 mt-4">
+              <a
+                href="https://www.instagram.com/kreicsfilms/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:opacity-70 transition-opacity"
+              >
+                <Image alt="Instagram logo" src="/instagram.svg" width={24} height={24} />
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCVxL93fPm0rDP31Nbh7hlVg"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:opacity-70 transition-opacity"
+              >
+                <Image alt="YouTube logo" src="/youtube.svg" width={30} height={30} />
+              </a>
+            </li>
           </ul>
         </div>
       </div>
-    </aside>
+    </header>
   );
 }

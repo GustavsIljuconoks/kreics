@@ -826,13 +826,13 @@ export interface ApiContactPageContactPage extends Schema.SingleType {
     singularName: 'contact-page';
     pluralName: 'contact-pages';
     displayName: 'Contact page';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
-    form_description: Attribute.Text;
+    hero: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -950,7 +950,7 @@ export interface ApiPhotoPhoto extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    event: Attribute.Component<'components.gallery', true>;
+    media: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

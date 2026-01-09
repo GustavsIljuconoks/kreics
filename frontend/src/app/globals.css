@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../../public/fonts/IBMPlexMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Grotesk Medium';
   src: url('../../public/fonts/SpaceGrotesk.ttf') format('truetype');
   font-weight: normal;
@@ -10,7 +17,7 @@
 }
 
 body {
-  font-family: 'Grotesk Medium', sans-serif;
+  font-family: 'IBM Plex Mono', 'Grotesk Medium', sans-serif;
 }
 
 @layer utilities {
@@ -21,7 +28,7 @@ body {
 
 @layer components {
   .nav-link {
-    @apply font-bold text-[20px] text-orange;
+    @apply font-bold text-[20px];
   }
 
   .page-collection {

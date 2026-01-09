@@ -12,10 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "event": {
-      "type": "component",
-      "repeatable": true,
-      "component": "components.gallery"
+    "media": {
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "type": "media",
+      "multiple": true
     }
   }
 }

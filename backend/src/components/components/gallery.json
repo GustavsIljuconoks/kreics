@@ -31,10 +31,16 @@
         "videos"
       ]
     },
-    "tag": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::media-tag.media-tag"
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

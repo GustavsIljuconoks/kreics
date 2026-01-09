@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import NavBar from '@/ui/nav-bar';
+import Footer from '@/ui/footer';
 import { getGlobalData } from '@/data/loaders';
 
 export const metadata: Metadata = {
@@ -21,14 +22,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div id="content" className="w-full min-h-screen px-8 py-20 sm:p-lg md:px-16 md:py-20 xl:px-32">
-          <main className="flex flex-col">
-            <div className="lg:flex w-full">
-              <NavBar data={globalData.header} />
-
-              {children}
-            </div>
+        <div className="w-full min-h-screen">
+          <NavBar data={globalData.header} />
+          <main className="w-full">
+            <div className="max-w-[1280px] mx-auto px-4 py-8">{children}</div>
           </main>
+          <Footer />
         </div>
       </body>
     </html>

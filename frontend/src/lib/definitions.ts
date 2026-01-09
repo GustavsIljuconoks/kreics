@@ -9,6 +9,10 @@ export interface EVENT {
     alternativeText: string;
     mime: string;
   };
+  video: {
+    url: string;
+    alternativeText: string;
+  };
   tags: string[];
   media: any;
 }

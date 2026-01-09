@@ -13,7 +13,7 @@ interface IThumbnail {
 export function Thumbnail(event: IThumbnail) {
   if (event.thumbnailType == 'video') {
     return (
-      <Link href={`/${event.type}/${event.name}`}>
+      <Link href={`/films/${event.name}`}>
         <figure className="work">
           <figcaption>{event.name}</figcaption>
           <video autoPlay muted loop src={event.imageSrc} height="auto" width="auto" />
@@ -24,7 +24,7 @@ export function Thumbnail(event: IThumbnail) {
 
   if (event.thumbnailType == 'photo') {
     return (
-      <Link href={`/${event.type}/${event.name}`}>
+      <Link href={`/films/${event.name}`}>
         <div className="project-cover">
           <div className="cover-container">
             <div className="cover-image-wrap w-full h-full relative">
