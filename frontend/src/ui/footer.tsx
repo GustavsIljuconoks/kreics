@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <div className="sticky bottom-0 py-4 z-10">
+    <div className="w-full py-4 mt-auto">
       <div className="flex justify-between max-w-[1280px] mx-auto px-4">
-        <div className="text-left">
+        <div className="text-left text-gray-700">
           <p>DIRECTOR OF PHOTOGRAPHY | kreics</p>
         </div>
         <div className="flex items-center space-x-4 ml-8">

@@ -69,9 +69,9 @@ export default function Page() {
           <strong>Booking</strong>
         </p>
 
-        <p>AusCrew</p>
+        <p>Ingus Iļjučonoks</p>
         <a href="mailto:kreics@gmail.com">kreics@gmail.com</a>
-        <a href="tel:+37127743709">+371 27 743 709</a>
+        <a href="tel:+37127743709">+371 27743710</a>
       </div>
     </div>
   );

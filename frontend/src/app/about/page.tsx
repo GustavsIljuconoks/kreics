@@ -26,13 +26,13 @@ export default async function Page() {
   const imageHeight = thumbnail.formats.large?.height || thumbnail.height;
 
   return (
-    <div className="lg:w-5/6 flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div id="bio-section" className="flex flex-col items-center justify-center mt-6 max-w-[1024px]">
         <div className="mb-6">
           <StrapiImage src={imageUrl} alt={thumbnail.alternativeText} width={imageWidth} height={imageHeight} />
         </div>
 
-        <div className="prose mx-auto text-justify">
+        <div className="text-left w-full">
           <BlockRendererClient content={description} />
         </div>
       </div>

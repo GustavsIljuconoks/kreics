@@ -42,7 +42,7 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
           {/* Logo */}
           <button className="w-[60px] h-[60px] cursor-pointer">
             <Link href={logo.url}>
-              <Image src="/instagram.svg" alt={logo.text} className="w-full h-auto" width={60} height={60} />
+              <Image src="/logo.png" alt={logo.text} className="w-full h-auto" width={60} height={60} />
             </Link>
           </button>
 
@@ -61,7 +61,7 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
 
           {/* Mobile Hamburger */}
           <div className="lg:hidden">
-            <Hamburger toggled={hamburger} toggle={setHamburger} color="#FF7B00" rounded hideOutline={false} />
+            <Hamburger toggled={hamburger} toggle={setHamburger} color="#000" rounded hideOutline={false} />
           </div>
         </div>
 

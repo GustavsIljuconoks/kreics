@@ -41,9 +41,9 @@ export default async function Page() {
   const { event = [] } = strapiData || {};
 
   return (
-    <div className="lg:w-5/6 text-center lg:ml-2">
+    <div className="text-center lg:ml-2">
       <section id="photo-showcase" className="w-full md:flex flex-wrap items-start">
-        <div className="image-collection-container md:-mt-[6.5rem] lg:grid-cols-2 lg:mt-0">
+        <div className="image-collection-container md:-mt-[6.5rem] lg:grid-cols-3 lg:mt-0">
           {event?.map((event: any) => (
             <Thumbnail
               key={event.id}

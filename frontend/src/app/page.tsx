@@ -28,7 +28,7 @@ export default async function Page() {
   const imageHeight = heroImage.formats.medium?.height || heroImage.height;
 
   return (
-    <div className="text-center">
+    <div className="text-left">
       <h1 className="text-orange text-6xl lg:text-8xl font-bold mb-4">{heading}</h1>
       <h4 className="text-black-70 text-md lg:text-2xl font-bold mb-8">{description}</h4>
       <div id="photo-box" className="flex justify-center mb-6">

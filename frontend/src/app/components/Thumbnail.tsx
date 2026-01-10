@@ -34,18 +34,9 @@ export function Thumbnail(event: IThumbnail) {
                 </div>
               </div>
             </div>
-
-            <div className="details-wrap">
-              <div className="details">
-                <div className="details-inner w-full p-[0%]">
-                  <div className="title-preserver-whitespace text-black-70" key={event.name}>
-                    <p>{event.name}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+        <p className="text-left">{event.name}</p>
       </Link>
     );
   }
