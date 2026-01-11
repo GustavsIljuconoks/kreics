@@ -43,17 +43,19 @@ export default async function Page() {
   return (
     <div className="text-center lg:ml-2">
       <section id="photo-showcase" className="w-full md:flex flex-wrap items-start">
-        <div className="image-collection-container md:-mt-[6.5rem] lg:grid-cols-3 lg:mt-0">
+        <div className="image-collection-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:-mt-[6.5rem] lg:mt-0 w-full">
           {event?.map((event: any) => (
-            <Thumbnail
-              key={event.id}
-              imageSrc={event.thumbnail?.url || ''}
-              imageAlt={event.thumbnail?.alternativeText || ''}
-              name={event.name || ''}
-              description={event.description || ''}
-              type={event.tag?.type || ''}
-              thumbnailType={event.thumbnail?.mime?.includes('image') ? 'photo' : 'video'}
-            />
+            <div key={event.id} className="h-80 flex flex-col">
+              <Thumbnail
+                imageSrc={event.thumbnail?.url || ''}
+                imageAlt={event.thumbnail?.alternativeText || ''}
+                name={event.name || ''}
+                description={event.description || ''}
+                type={event.tag?.type || ''}
+                thumbnailType={event.thumbnail?.mime?.includes('image') ? 'photo' : 'video'}
+                className="h-full w-full"
+              />
+            </div>
           ))}
         </div>
       </section>

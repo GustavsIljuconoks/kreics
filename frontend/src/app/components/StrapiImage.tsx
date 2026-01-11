@@ -25,7 +25,7 @@ export function StrapiImage({ src, alt, height, width, type, className, onClick 
         alt={alt ?? 'image taken by kreics'}
         height={height ?? 0}
         width={width ?? 0}
-        className={`${className} w-full h-auto`}
+        className={`w-full h-auto ${className ?? ''}`}
         onClick={onClick}
         loading="eager"
         sizes="100vw"

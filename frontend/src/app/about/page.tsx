@@ -27,7 +27,7 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col items-center">
-      <div id="bio-section" className="flex flex-col items-center justify-center mt-6 max-w-[1024px]">
+      <div id="bio-section" className="flex flex-col items-center justify-center mt-6">
         <div className="mb-6">
           <StrapiImage src={imageUrl} alt={thumbnail.alternativeText} width={imageWidth} height={imageHeight} />
         </div>

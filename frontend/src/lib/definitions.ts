@@ -15,6 +15,8 @@ export interface EVENT {
   };
   tags: string[];
   media: any;
+  youtube_id: string;
+  youtube_link: string;
 }
 
 export interface IFormData {

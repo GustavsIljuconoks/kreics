@@ -5,11 +5,43 @@ import { StrapiImage } from '@/app/components/StrapiImage';
 import { useEffect, useState } from 'react';
 import qs from 'qs';
 import { flattenAttributes } from '@/lib/utils';
+import YouTubeEmbed from '@/app/components/YouTubeEmbed';
 
 interface ProjectPageParams {
   params: {
     name: string;
   };
+}
+
+function extractYouTubeId(link?: string | null) {
+  if (!link) return null;
+
+  const trimmed = link.trim();
+  if (!trimmed) return null;
+
+  // If the link already looks like a YouTube ID, allow it.
+  if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) return trimmed;
+
+  try {
+    const url = new URL(trimmed);
+    const host = url.hostname.replace(/^www\./, '').toLowerCase();
+
+    if (host === 'youtu.be') {
+      return url.pathname.replace('/', '').split(/[?&]/)[0] || null;
+    }
+
+    if (host.endsWith('youtube.com')) {
+      const vParam = url.searchParams.get('v');
+      if (vParam) return vParam;
+
+      const pathMatch = url.pathname.match(/^\/(embed|shorts)\/([^/?#]+)/);
+      if (pathMatch?.[2]) return pathMatch[2];
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
 }
 
 export default function Page({ params }: ProjectPageParams) {
@@ -32,9 +64,8 @@ export default function Page({ params }: ProjectPageParams) {
           { encodeValuesOnly: true },
         );
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}/api/video?${query}`,
-        );
+        const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}/api/video?${query}`;
+        const response = await fetch(apiUrl);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -43,13 +74,13 @@ export default function Page({ params }: ProjectPageParams) {
         const data = await response.json();
         const flattenedData = flattenAttributes(data);
 
-        if (flattenedData?.event) {
+        if (flattenedData?.event && Array.isArray(flattenedData.event)) {
           const filteredEvents = flattenedData.event.filter(
             (event: { name: string }) => event.name === decodeURIComponent(name),
           );
           setEvents(filteredEvents);
         } else {
-          setEvents(null);
+          setEvents([]);
         }
       } catch (err) {
         console.error('Error fetching events:', err);
@@ -66,14 +97,15 @@ export default function Page({ params }: ProjectPageParams) {
   if (error) return <div>Error: {error}</div>;
   if (!events || events.length === 0) return <div>No event found with name: {decodeURIComponent(name)}</div>;
   const event: EVENT = events[0];
+  const videoId = event?.youtube_id || extractYouTubeId(event?.youtube_link);
 
   if (event) {
     return (
-      <div id="content" className="w-full pb-16 xl:px-32">
+      <div id="content" className="w-full pb-16">
         <div className="lg:flex flex-col items-center w-full">
-          <div className="w-full lg:w-5/6 text-center">
+          <div className="w-full text-center">
             <div className="project-module w-full bg-black-10 mb-8">
-              {event.video && <video controls src={event.video.url} height="auto" width="auto" />}
+              {videoId ? <YouTubeEmbed videoId={videoId} title={event.name} /> : null}
             </div>
 
             <div className="description mb-32 p-6 text-start lg:p-0">

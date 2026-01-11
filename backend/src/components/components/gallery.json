@@ -31,16 +31,11 @@
         "videos"
       ]
     },
-    "video": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "youtube_id": {
+      "type": "string"
+    },
+    "youtube_link": {
+      "type": "string"
     }
   }
 }
