@@ -16,7 +16,9 @@ const query = qs.stringify(
 
 async function getStrapiData() {
   try {
-    const res = await fetch(`${BASE_URL}/api/photo?${query}`);
+    const res = await fetch(`${BASE_URL}/api/photo?${query}`, {
+      next: { tags: ['strapi-photos'] },
+    });
 
     if (!res.ok) {
       console.error(`Error: ${res.status} - ${res.statusText}`);

@@ -32,10 +32,15 @@
       ]
     },
     "youtube_id": {
-      "type": "string"
+      "type": "string",
+      "private": false,
+      "configurable": true
     },
     "youtube_link": {
-      "type": "string"
+      "type": "string",
+      "private": false,
+      "configurable": true
     }
   }
 }
+

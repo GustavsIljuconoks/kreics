@@ -20,7 +20,7 @@ const query = qs.stringify(
 async function getStrapiData(path: string) {
   try {
     const res = await fetch(`${BASE_URL}${path}?${query}`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { tags: ['strapi-films'] },
     });
 
     if (!res.ok) {

@@ -37,8 +37,8 @@ export interface ComponentsGallery extends Schema.Component {
     description: Attribute.Text;
     media: Attribute.Media<'images' | 'videos', true>;
     thumbnail: Attribute.Media<'images' | 'videos'> & Attribute.Required;
-    youtube_id: Attribute.String;
-    youtube_link: Attribute.String;
+    youtube_id: Attribute.String & Attribute.Configurable;
+    youtube_link: Attribute.String & Attribute.Configurable;
   };
 }
 

@@ -2,7 +2,7 @@ import qs from 'qs';
 import { BASE_URL, API_TOKEN } from './definitions';
 import { flattenAttributes } from './utils';
 
-export async function getStrapiEventData(path: string, eventName: string) {
+export async function getStrapiEventData(path: string, eventName: string, tag?: string) {
   const query = qs.stringify(
     {
       populate: {
@@ -15,6 +15,7 @@ export async function getStrapiEventData(path: string, eventName: string) {
   );
 
   const res = await fetch(`${BASE_URL}${path}?${query}`, {
+    ...(tag ? { next: { tags: [tag] } } : {}),
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
     },
@@ -35,8 +36,9 @@ export async function getStrapiEventData(path: string, eventName: string) {
   return filteredEvents;
 }
 
-export async function getStrapiData(path: string) {
+export async function getStrapiData(path: string, tag?: string) {
   const res = await fetch(BASE_URL + path + '?populate=*', {
+    ...(tag ? { next: { tags: [tag] } } : {}),
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
     },

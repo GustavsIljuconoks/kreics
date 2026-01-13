@@ -4,7 +4,9 @@ import BlockRendererClient from '@/app/BlockRenderClient';
 import { BASE_URL } from '@/lib/definitions';
 
 async function getStrapiData(path: string) {
-  const res = await fetch(BASE_URL + path + '?populate=*');
+  const res = await fetch(BASE_URL + path + '?populate=*', {
+    next: { tags: ['strapi-home'] },
+  });
 
   if (!res.ok) {
     console.error(`Error: ${res.status} - ${res.statusText}`);
