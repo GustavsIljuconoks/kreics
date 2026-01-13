@@ -75,7 +75,7 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
                 </Link>
               </li>
             ))}
-            <li className="flex items-center space-x-4 mt-4">
+            <li className="flex items-center justify-around mt-4">
               <a
                 href="https://www.instagram.com/kreicsfilms/"
                 target="_blank"

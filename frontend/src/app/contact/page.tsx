@@ -65,12 +65,12 @@ export default function Page() {
       )}
 
       <div className="info flex flex-col items-start">
-        <p>
+        <p className="text-[18px] mb-6">
           <strong>Booking</strong>
         </p>
 
         <p>Ingus Iļjučonoks</p>
-        <a href="mailto:kreics@gmail.com">kreics@gmail.com</a>
+        <a href="mailto:kreicsfilms@gmail.com">kreicsfilms@gmail.com</a>
         <a href="tel:+37127743709">+371 27743710</a>
       </div>
     </div>

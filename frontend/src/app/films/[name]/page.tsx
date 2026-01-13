@@ -109,7 +109,7 @@ export default function Page({ params }: ProjectPageParams) {
             </div>
 
             <div className="description mb-32 p-6 text-start lg:p-0">
-              <h1 className="text-3xl font-bold mb-4 text-orange">{event.name}</h1>
+              <h1 className="text-3xl font-bold mb-4">{event.name}</h1>
               <p className="text-justify">{event.description}</p>
             </div>
 
