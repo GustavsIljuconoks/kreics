@@ -10,9 +10,6 @@
     "name": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
-    },
     "media": {
       "type": "media",
       "multiple": true,
@@ -32,15 +29,13 @@
       ]
     },
     "youtube_id": {
-      "type": "string",
-      "private": false,
-      "configurable": true
+      "type": "string"
     },
     "youtube_link": {
-      "type": "string",
-      "private": false,
-      "configurable": true
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
     }
   }
 }
-

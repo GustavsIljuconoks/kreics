@@ -9,6 +9,18 @@ export function getStrapiMedia(url: string | null) {
   return `${getStrapiURL()}${url}`;
 }
 
+export function getBlurDataURL(url: string | null): string | undefined {
+  if (!url) return undefined;
+
+  // For Cloudinary images, generate a tiny blurred version
+  if (url.includes('res.cloudinary.com')) {
+    return url.replace('/upload/', '/upload/w_10,q_1,e_blur:1000/');
+  }
+
+  // Fallback: simple gray SVG placeholder
+  return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2VlZSIvPjwvc3ZnPg==';
+}
+
 export function flattenAttributes(data: any): any {
   if (typeof data !== 'object' || data === null || data instanceof Date || typeof data === 'function') {
     return data;

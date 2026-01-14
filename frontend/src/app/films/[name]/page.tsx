@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import qs from 'qs';
 import { flattenAttributes } from '@/lib/utils';
 import YouTubeEmbed from '@/app/components/YouTubeEmbed';
+import BlockRendererClient from '@/app/BlockRenderClient';
 
 interface ProjectPageParams {
   params: {
@@ -110,7 +111,7 @@ export default function Page({ params }: ProjectPageParams) {
 
             <div className="description mb-32 p-6 text-start lg:p-0">
               <h1 className="text-3xl font-bold mb-4">{event.name}</h1>
-              <p className="text-justify">{event.description}</p>
+              <BlockRendererClient content={event.description} />
             </div>
 
             {event.media.data?.map((image: any, idx: number) => (
@@ -121,7 +122,7 @@ export default function Page({ params }: ProjectPageParams) {
                   width={1000}
                   height={1000}
                   type={'image'}
-                  className="my-4 cursor-pointer"
+                  className="my-4"
                 />
               </div>
             ))}

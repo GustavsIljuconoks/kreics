@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { getStrapiMedia } from '@/lib/utils';
+import { getStrapiMedia, getBlurDataURL } from '@/lib/utils';
 
 interface StrapiImageProps {
   src: string;
@@ -9,12 +9,23 @@ interface StrapiImageProps {
   type?: 'image' | 'video';
   className?: string;
   onClick?: () => void;
+  blurDataURL?: string;
 }
 
-export function StrapiImage({ src, alt, height, width, type, className, onClick }: Readonly<StrapiImageProps>) {
+export function StrapiImage({
+  src,
+  alt,
+  height,
+  width,
+  type,
+  className,
+  onClick,
+  blurDataURL,
+}: Readonly<StrapiImageProps>) {
   if (!src) return null;
   const imageUrl = getStrapiMedia(src);
   const imageFallback = `https://placehold.co/${width}x${height}`;
+  const blur = blurDataURL || getBlurDataURL(imageUrl);
 
   if (type == 'video') {
     return <video controls src={imageUrl ?? imageFallback} height="auto" width="auto" className={className} />;
@@ -27,7 +38,9 @@ export function StrapiImage({ src, alt, height, width, type, className, onClick 
         width={width ?? 0}
         className={`w-full h-auto ${className ?? ''}`}
         onClick={onClick}
-        loading="eager"
+        loading="lazy"
+        placeholder={blur ? 'blur' : 'empty'}
+        blurDataURL={blur}
         sizes="100vw"
       />
     );
