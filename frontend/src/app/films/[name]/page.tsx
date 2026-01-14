@@ -111,7 +111,9 @@ export default function Page({ params }: ProjectPageParams) {
 
             <div className="description mb-32 p-6 text-start lg:p-0">
               <h1 className="text-3xl font-bold mb-4">{event.name}</h1>
-              <BlockRendererClient content={event.description} />
+              <BlockRendererClient
+                content={typeof event.description === 'string' ? JSON.parse(event.description) : event.description}
+              />
             </div>
 
             {event.media.data?.map((image: any, idx: number) => (
