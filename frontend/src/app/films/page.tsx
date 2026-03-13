@@ -6,11 +6,7 @@ import qs from 'qs';
 
 const query = qs.stringify(
   {
-    populate: {
-      event: {
-        populate: '*',
-      },
-    },
+    populate: '*',
   },
   {
     encodeValuesOnly: true,
@@ -31,29 +27,30 @@ async function getStrapiData(path: string) {
     return flattenAttributes(data);
   } catch (error) {
     console.error('Error fetching Strapi data:', error);
-    return { event: [] };
+    return { data: [] };
   }
 }
 
 export default async function Page() {
-  const strapiData = await getStrapiData('/api/video');
+  const strapiData = await getStrapiData('/api/films');
   if (!strapiData) return <p>Loading or error...</p>;
-  const { event = [] } = strapiData || {};
+  const films = strapiData?.data || [];
 
   return (
     <div className="text-center lg:ml-2">
-      <section id="photo-showcase" className="w-full md:flex flex-wrap items-start">
-        <div className="image-collection-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:-mt-[6.5rem] lg:mt-0 w-full">
-          {event?.map((event: any) => (
-            <div key={event.id} className="h-80 flex flex-col">
+      <section id="photo-showcase" className="w-full">
+        <div className="image-collection-container grid w-full grid-cols-1 gap-4 !mt-0 sm:grid-cols-2 lg:grid-cols-3">
+          {films?.map((film: any) => (
+            <div key={film.id} className="h-full">
               <Thumbnail
-                imageSrc={event.thumbnail?.url || ''}
-                imageAlt={event.thumbnail?.alternativeText || ''}
-                name={event.name || ''}
-                description={event.description || ''}
-                type={event.tag?.type || ''}
-                thumbnailType={event.thumbnail?.mime?.includes('image') ? 'photo' : 'video'}
-                className="h-full w-full"
+                imageSrc={film.thumbnail?.url || ''}
+                imageAlt={film.thumbnail?.alternativeText || ''}
+                name={film.name || ''}
+                slug={film.slug || ''}
+                description={film.description || ''}
+                type={film.tag?.type || ''}
+                thumbnailType={film.thumbnail?.mime?.includes('image') ? 'photo' : 'video'}
+                className="h-64"
               />
             </div>
           ))}

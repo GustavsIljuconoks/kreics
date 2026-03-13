@@ -46,7 +46,8 @@ function extractYouTubeId(link?: string | null) {
 }
 
 export default function Page({ params }: ProjectPageParams) {
-  const { name } = params;
+  const { name: slugParam } = params;
+  const routeSlug = decodeURIComponent(slugParam);
   const [events, setEvents] = useState<EVENT[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -56,16 +57,17 @@ export default function Page({ params }: ProjectPageParams) {
       try {
         const query = qs.stringify(
           {
-            populate: {
-              event: {
-                populate: '*',
+            filters: {
+              slug: {
+                $eq: routeSlug,
               },
             },
+            populate: '*',
           },
           { encodeValuesOnly: true },
         );
 
-        const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}/api/video?${query}`;
+        const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}/api/films?${query}`;
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
@@ -75,11 +77,8 @@ export default function Page({ params }: ProjectPageParams) {
         const data = await response.json();
         const flattenedData = flattenAttributes(data);
 
-        if (flattenedData?.event && Array.isArray(flattenedData.event)) {
-          const filteredEvents = flattenedData.event.filter(
-            (event: { name: string }) => event.name === decodeURIComponent(name),
-          );
-          setEvents(filteredEvents);
+        if (flattenedData?.data && Array.isArray(flattenedData.data)) {
+          setEvents(flattenedData.data);
         } else {
           setEvents([]);
         }
@@ -92,11 +91,11 @@ export default function Page({ params }: ProjectPageParams) {
     }
 
     fetchEvents();
-  }, [name]);
+  }, [routeSlug]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (!events || events.length === 0) return <div>No event found with name: {decodeURIComponent(name)}</div>;
+  if (!events || events.length === 0) return <div>No event found with slug: {routeSlug}</div>;
   const event: EVENT = events[0];
   const videoId = event?.youtube_id || extractYouTubeId(event?.youtube_link);
 

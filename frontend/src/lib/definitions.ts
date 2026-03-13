@@ -3,6 +3,7 @@ export const API_TOKEN = process.env.STRAPI_API_TOKEN;
 
 export interface EVENT {
   name: string;
+  slug?: string;
   description: string;
   thumbnail: {
     url: string;
