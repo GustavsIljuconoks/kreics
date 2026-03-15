@@ -40,7 +40,7 @@ export default async function Page() {
           />
         </div>
 
-        <div className="max-w-prose text-left md:flex-1">
+        <div className="max-w-prose text-justify md:flex-1">
           <BlockRendererClient content={description} />
         </div>
       </div>

@@ -49,7 +49,7 @@ export default async function Page() {
 
   return (
     <div className="w-full">
-      <div className="container mx-auto py-8">
+      <div className="mx-auto">
         {photos && photos.length > 0 ? (
           <PhotoGallery photos={photos} />
         ) : (

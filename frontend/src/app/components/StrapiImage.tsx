@@ -42,6 +42,7 @@ export function StrapiImage({
         placeholder={blur ? 'blur' : 'empty'}
         blurDataURL={blur}
         sizes="100vw"
+        quality={100}
       />
     );
   }

@@ -32,7 +32,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
     <div id="content" className="w-full pb-16">
       <div className="lg:flex flex-col items-center w-full">
         <div className="w-full text-center">
-          <Masonry breakpointCols={{ default: 3, 1024: 1, 1600: 2 }} className="flex gap-2">
+          <Masonry breakpointCols={{ default: 3, 500: 1, 1024: 2 }} className="flex gap-2">
             {imagePhotos.map((image: any, idx: number) => (
               <div key={image.id || idx}>
                 <StrapiImage
@@ -44,7 +44,7 @@ export function PhotoGallery({ photos }: PhotoGalleryProps) {
                   alt={image.alternativeText || image.name || 'Photo'}
                   width={1000}
                   height={1000}
-                  className="my-4 hover:opacity-70 cursor-pointer"
+                  className="mb-2 hover:opacity-70 cursor-pointer"
                 />
               </div>
             ))}

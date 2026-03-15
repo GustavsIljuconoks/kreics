@@ -40,6 +40,7 @@ export default function Page() {
         setLoading(false);
       }
     }
+
     fetchData();
   }, []);
 
@@ -49,29 +50,30 @@ export default function Page() {
   const { hero } = strapiData || {};
 
   return (
-    <div className="text-center mx-auto">
-      <div className="description mb-12"></div>
+    <div className="mx-auto flex h-full min-h-0 items-center overflow-hidden">
+      <div className="flex h-full w-full flex-col items-start justify-center gap-4 overflow-hidden">
+        {hero && (
+          <div className="flex w-full justify-center mb-8">
+            <StrapiImage
+              src={hero.url}
+              alt={hero.alternativeText || 'Contact hero image'}
+              width={hero.width || 800}
+              height={hero.height || 600}
+              className="mx-auto !h-auto  !w-auto max-w-full object-contain"
+            />
+          </div>
+        )}
 
-      {hero && (
-        <div className="mb-12">
-          <StrapiImage
-            src={hero.url}
-            alt={hero.alternativeText || 'Contact hero image'}
-            width={hero.width || 800}
-            height={hero.height || 600}
-            className="w-full h-auto mx-auto"
-          />
+        <div className="flex w-full max-w-md flex-col items-start justify-center text-left">
+          <p className="mb-2 text-[18px] font-bold">Booking</p>
+          <p>Ingus Iļjučonoks</p>
+          <a className="hover:underline" href="mailto:kreicsfilms@gmail.com">
+            kreicsfilms@gmail.com
+          </a>
+          <a className="hover:underline" href="tel:+37127743710">
+            +371 27743710
+          </a>
         </div>
-      )}
-
-      <div className="info flex flex-col items-start">
-        <p className="text-[18px] mb-6">
-          <strong>Booking</strong>
-        </p>
-
-        <p>Ingus Iļjučonoks</p>
-        <a href="mailto:kreicsfilms@gmail.com">kreicsfilms@gmail.com</a>
-        <a href="tel:+37127743709">+371 27743710</a>
       </div>
     </div>
   );

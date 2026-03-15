@@ -25,7 +25,7 @@ export default async function RootLayout({
         <div className="w-full min-h-screen flex flex-col">
           <NavBar data={globalData.header} />
           <main className="w-full flex-1">
-            <div className="max-w-[1280px] mx-auto px-4 py-8">{children}</div>
+            <div className="max-w-[1280px] mx-auto h-full px-4 py-8">{children}</div>
           </main>
           <Footer />
         </div>

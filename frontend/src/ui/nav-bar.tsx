@@ -38,7 +38,7 @@ export default function NavBar({ data }: Readonly<IHeaderProps>) {
   return (
     <header className="w-full bg-white sticky top-0 z-50">
       <div className="max-w-[1280px] mx-auto px-4 ">
-        <div className="flex flex-row justify-between items-center py-4 md:pt-20">
+        <div className="flex flex-row justify-between items-center py-4 md:pt-14">
           {/* Logo */}
           <button className="w-[60px] h-[60px] cursor-pointer">
             <Link href={logo.url}>
