@@ -11,17 +11,21 @@ export default function BlockRendererClient({ content }: { readonly content: Blo
     <BlocksRenderer
       content={content}
       blocks={{
-        paragraph: ({ children }) => <p className="text-neutral900 text-xl">{children}</p>,
+        paragraph: ({ children }) => <p className="text-neutral900 sm:text-xl">{children}</p>,
         link: ({ children, url }) => (
           <Link className="underline" href={url}>
             {children}
           </Link>
         ),
-        image: ({ image }) => {
-          return (
-            <StrapiImage src={image.url} width={image.width} height={image.height} alt={image.alternativeText || ''} />
-          );
-        },
+        image: ({ image }) => (
+          <StrapiImage
+            src={image.url}
+            width={image.width}
+            height={image.height}
+            alt={image.alternativeText || ''}
+            preset="content"
+          />
+        ),
       }}
     />
   );

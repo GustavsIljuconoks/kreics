@@ -102,22 +102,25 @@ export default function Page({ params }: ProjectPageParams) {
   if (event) {
     return (
       <div id="content" className="w-full pb-16">
-        <div className="lg:flex flex-col items-center w-full">
-          <div className="w-full text-center">
-            <div className="project-module w-full bg-black-10 mb-8">
+        <div className="flex flex-col items-center w-full">
+          <div className="w-full">
+            <div className="project-module mx-auto mb-12 w-full max-w-4xl">
               {videoId ? <YouTubeEmbed videoId={videoId} title={event.name} /> : null}
             </div>
 
-            <div className="description mb-32 p-6 text-start lg:p-0">
-              <h1 className="text-3xl font-bold mb-4">{event.name}</h1>
-              <BlockRendererClient
-                content={typeof event.description === 'string' ? JSON.parse(event.description) : event.description}
-              />
+            <div className="mx-auto mb-16 w-full text-start">
+              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{event.name}</h1>
+              {event.description ? (
+                <BlockRendererClient
+                  content={typeof event.description === 'string' ? JSON.parse(event.description) : event.description}
+                />
+              ) : null}
             </div>
 
-            {event.media.data?.map((image: any, idx: number) => (
-              <div key={idx}>
+            <div className="mx-auto w-full">
+              {event.media.data?.map((image: any, idx: number) => (
                 <StrapiImage
+                  key={idx}
                   src={image.url}
                   alt={image.alternativeText}
                   width={1000}
@@ -125,8 +128,8 @@ export default function Page({ params }: ProjectPageParams) {
                   type={'image'}
                   className="my-4"
                 />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -30,17 +30,18 @@ export default async function Page() {
   return (
     <div className="flex flex-col items-center">
       <div id="bio-section" className="mt-6 flex w-full flex-col items-start justify-center gap-8 md:flex-row">
-        <div className="w-fit shrink-0">
+        <div className="mx-auto md:mx-0 sm:w-fit shrink-0">
           <StrapiImage
             src={imageUrl}
             alt={thumbnail.alternativeText}
             width={imageWidth}
             height={imageHeight}
             className="!w-auto max-h-[40vh] max-w-full object-contain sm:max-h-[48vh]"
+            preset="hero"
           />
         </div>
 
-        <div className="max-w-prose text-justify md:flex-1">
+        <div className="md:max-w-prose text-justify md:flex-1">
           <BlockRendererClient content={description} />
         </div>
       </div>
