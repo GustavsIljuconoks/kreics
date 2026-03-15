@@ -1,10 +1,17 @@
 'use client';
 
 import { EVENT } from '@/lib/definitions';
-import { StrapiImage } from '@/app/components/StrapiImage';
+import Image, { type ImageLoaderProps } from 'next/image';
 import { useEffect, useState } from 'react';
 import qs from 'qs';
-import { flattenAttributes } from '@/lib/utils';
+import {
+  flattenAttributes,
+  getBlurDataURL,
+  getCloudinaryTransformedUrl,
+  getMediaDimensions,
+  getStrapiMedia,
+  isCloudinaryUrl,
+} from '@/lib/utils';
 import YouTubeEmbed from '@/app/components/YouTubeEmbed';
 import BlockRendererClient from '@/app/BlockRenderClient';
 
@@ -109,7 +116,7 @@ export default function Page({ params }: ProjectPageParams) {
             </div>
 
             <div className="mx-auto mb-16 w-full text-start">
-              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{event.name}</h1>
+              <h1 className="text-xl font-bold tracking-tight sm:text-2xl">{event.name}</h1>
               {event.description ? (
                 <BlockRendererClient
                   content={typeof event.description === 'string' ? JSON.parse(event.description) : event.description}
@@ -118,17 +125,37 @@ export default function Page({ params }: ProjectPageParams) {
             </div>
 
             <div className="mx-auto w-full">
-              {event.media.data?.map((image: any, idx: number) => (
-                <StrapiImage
-                  key={idx}
-                  src={image.url}
-                  alt={image.alternativeText}
-                  width={1000}
-                  height={1000}
-                  type={'image'}
-                  className="my-4"
-                />
-              ))}
+              {event.media.data?.map((image, idx) => {
+                const dimensions = getMediaDimensions(image, ['large', 'medium', 'small']);
+                const imageUrl = getStrapiMedia(image.url);
+                const blurDataURL = getBlurDataURL(imageUrl);
+                const shouldUseCloudinaryLoader = Boolean(imageUrl && isCloudinaryUrl(imageUrl));
+                const loader = shouldUseCloudinaryLoader
+                  ? ({ src, width, quality }: ImageLoaderProps) =>
+                      getCloudinaryTransformedUrl(src, {
+                        width,
+                        quality: quality ?? 100,
+                      })
+                  : undefined;
+                const fallbackUrl = `https://placehold.co/${dimensions.width}x${dimensions.height}`;
+
+                return (
+                  <Image
+                    key={idx}
+                    src={imageUrl ?? fallbackUrl}
+                    alt={image.alternativeText || image.name || event.name}
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    className="my-4 h-auto w-full"
+                    loading="lazy"
+                    placeholder={blurDataURL ? 'blur' : 'empty'}
+                    blurDataURL={blurDataURL}
+                    sizes="100vw"
+                    quality={100}
+                    loader={loader}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

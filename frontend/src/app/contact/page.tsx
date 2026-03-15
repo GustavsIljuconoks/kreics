@@ -1,17 +1,12 @@
 'use client';
 
 import { StrapiImage } from '@/app/components/StrapiImage';
+import type { StrapiMedia } from '@/lib/definitions';
 import { flattenAttributes } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 interface IStrapiData {
-  hero?: {
-    id: number;
-    url: string;
-    alternativeText?: string;
-    width?: number;
-    height?: number;
-  };
+  hero?: StrapiMedia;
 }
 
 export default function Page() {
@@ -60,6 +55,7 @@ export default function Page() {
               width={hero.width || 800}
               height={hero.height || 600}
               className="mx-auto !h-auto  !w-auto max-w-full object-contain"
+              preset="hero"
             />
           </div>
         )}

@@ -1,3 +1,5 @@
+import type { StrapiMedia, StrapiMediaFormatKey } from '@/lib/definitions';
+
 export function getStrapiURL() {
   return process.env.NEXT_PUBLIC_STRAPI_URL ?? 'http://localhost:1337';
 }
@@ -9,16 +11,109 @@ export function getStrapiMedia(url: string | null) {
   return `${getStrapiURL()}${url}`;
 }
 
+function normalizeRemoteUrl(url: string) {
+  return url.startsWith('//') ? `https:${url}` : url;
+}
+
+function clampQuality(quality: number) {
+  return Math.min(100, Math.max(1, Math.round(quality)));
+}
+
+function hasCloudinaryTransformation(pathSegment: string | undefined) {
+  if (!pathSegment) return false;
+  return !/^v\d+$/.test(pathSegment);
+}
+
+export function isCloudinaryUrl(url: string | null): boolean {
+  if (!url) return false;
+
+  try {
+    return new URL(normalizeRemoteUrl(url)).hostname === 'res.cloudinary.com';
+  } catch {
+    return url.includes('res.cloudinary.com');
+  }
+}
+
+interface CloudinaryTransformOptions {
+  width?: number;
+  quality?: number;
+  transformations?: string[];
+}
+
+export function getCloudinaryTransformedUrl(url: string, options: CloudinaryTransformOptions = {}) {
+  const normalizedUrl = normalizeRemoteUrl(url);
+
+  if (!isCloudinaryUrl(normalizedUrl)) return normalizedUrl;
+
+  try {
+    const parsedUrl = new URL(normalizedUrl);
+    const pathSegments = parsedUrl.pathname.split('/').filter(Boolean);
+    const uploadIndex = pathSegments.indexOf('upload');
+
+    if (uploadIndex === -1 || uploadIndex === pathSegments.length - 1) return normalizedUrl;
+
+    const segmentAfterUpload = pathSegments[uploadIndex + 1];
+
+    if (hasCloudinaryTransformation(segmentAfterUpload)) {
+      return normalizedUrl;
+    }
+
+    const transformations = ['f_auto', 'dpr_auto', 'c_limit'];
+
+    if (options.width && options.width > 0) {
+      transformations.push(`w_${Math.round(options.width)}`);
+    }
+
+    if (options.quality) {
+      transformations.push(`q_${clampQuality(options.quality)}`);
+    }
+
+    if (options.transformations?.length) {
+      transformations.push(...options.transformations);
+    }
+
+    parsedUrl.pathname = `/${[
+      ...pathSegments.slice(0, uploadIndex + 1),
+      transformations.join(','),
+      ...pathSegments.slice(uploadIndex + 1),
+    ].join('/')}`;
+
+    return parsedUrl.toString();
+  } catch {
+    return normalizedUrl;
+  }
+}
+
 export function getBlurDataURL(url: string | null): string | undefined {
   if (!url) return undefined;
 
-  // For Cloudinary images, generate a tiny blurred version
-  if (url.includes('res.cloudinary.com')) {
-    return url.replace('/upload/', '/upload/w_10,q_1,e_blur:1000/');
+  if (isCloudinaryUrl(url)) {
+    return getCloudinaryTransformedUrl(url, {
+      width: 16,
+      quality: 1,
+      transformations: ['e_blur:1000'],
+    });
   }
 
-  // Fallback: simple gray SVG placeholder
   return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2VlZSIvPjwvc3ZnPg==';
+}
+
+export function getMediaDimensions(
+  media: Pick<StrapiMedia, 'width' | 'height' | 'formats'> | null | undefined,
+  preferredFormats: StrapiMediaFormatKey[] = [],
+) {
+  for (const formatName of preferredFormats) {
+    const format = media?.formats?.[formatName];
+
+    if (format?.width && format.height) {
+      return { width: format.width, height: format.height };
+    }
+  }
+
+  return {
+    width: media?.width && media.width > 0 ? media.width : 1,
+    height: media?.height && media.height > 0 ? media.height : 1,
+  };
 }
 
 export function slugify(value: string): string {

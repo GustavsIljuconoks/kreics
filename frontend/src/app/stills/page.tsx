@@ -1,5 +1,6 @@
 import { flattenAttributes } from '@/lib/utils';
 import { PhotoGallery } from '@/app/components/PhotoGallery';
+import type { StrapiMedia } from '@/lib/definitions';
 import { BASE_URL } from '@/lib/definitions';
 import qs from 'qs';
 
@@ -28,11 +29,8 @@ async function getStrapiData() {
     const data = await res.json();
 
     const flattenedData = flattenAttributes(data);
-
-    // Extract media files from the photo single type
-    const allPhotos: any[] = [];
+    const allPhotos: StrapiMedia[] = [];
     if (flattenedData?.media?.data) {
-      // flattenedData.media.data is the array of actual media items
       allPhotos.push(...flattenedData.media.data);
     }
 

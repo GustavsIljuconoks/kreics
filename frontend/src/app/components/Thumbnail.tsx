@@ -5,10 +5,10 @@ import { slugify } from '@/lib/utils';
 interface IThumbnail {
   imageSrc: string;
   imageAlt: string;
+  imageWidth?: number;
+  imageHeight?: number;
   name: string;
   slug?: string;
-  description: string;
-  type: string;
   thumbnailType: string;
   className?: string;
 }
@@ -42,9 +42,10 @@ export function Thumbnail(event: IThumbnail) {
                   <StrapiImage
                     src={event.imageSrc}
                     alt={event.imageAlt}
-                    width={1000}
-                    height={1000}
+                    width={event.imageWidth}
+                    height={event.imageHeight}
                     className="h-full w-full object-cover"
+                    preset="card"
                   />
                 </div>
               </div>
